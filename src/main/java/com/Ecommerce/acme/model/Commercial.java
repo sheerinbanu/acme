@@ -5,11 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
 
-import org.springframework.data.annotation.Id;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
 
 
 @Entity
@@ -17,7 +14,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper=false)
 public class Commercial extends Utilisateur{
-	@Id
+	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idCommercial;
 	
