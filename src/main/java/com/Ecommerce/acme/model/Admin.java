@@ -10,8 +10,8 @@ import lombok.EqualsAndHashCode;
 @Table(name= "admin")
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class Admin extends Users{
+public class Admin extends User{
 	
-	private int id_Admin;
+	private int id_admin;
 	
 }

@@ -12,7 +12,7 @@ import lombok.EqualsAndHashCode;
 @Table(name= "commercial")
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class Commercial extends Users{
+public class Commercial extends User{
 	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id_commercial;

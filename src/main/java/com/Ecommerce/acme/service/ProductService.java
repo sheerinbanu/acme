@@ -29,7 +29,7 @@ public class ProductService {
 		pr.deleteById(id);
 	}
 	
-	public void insertProduit(Product Product) {
+	public void insertProduct(Product Product) {
 		pr.save(Product);
 	}
 }

@@ -29,7 +29,7 @@ public class CartService {
 		cr.deleteById(id);
 	}
 	
-	public void insertCartr(Cart Cart) {
+	public void insertCart(Cart Cart) {
 		cr.save(Cart);
 	}
 }
