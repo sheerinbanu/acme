@@ -8,16 +8,14 @@ import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-
 @Entity
 @Table(name= "commercial")
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class Commercial extends Utilisateur{
+public class Commercial extends Users{
 	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idCommercial;
-	
-	private int tauxMarge;
+	private int id_commercial;
+	private int margin_rate;
 
 }
