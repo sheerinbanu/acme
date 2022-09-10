@@ -68,7 +68,7 @@ public class UserController {
 
     @GetMapping({"/", "/home"})
     public String welcome(Model model) {
-        return "homepage";
+        return "Homepage";
     }
     
     @GetMapping({"/profil"})
