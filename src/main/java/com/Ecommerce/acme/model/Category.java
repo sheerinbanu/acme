@@ -1,8 +1,13 @@
 package com.Ecommerce.acme.model;
 
+
 import javax.persistence.Entity;
+
 import javax.persistence.Id;
+
+
 import javax.persistence.Table;
+
 
 
 import lombok.Data;
@@ -17,5 +22,9 @@ public class Category {
 	
 	private String name;
 	
-
+	//@JoinColumn()
+	//@ManyToOne(cascade = CascadeType.ALL)
+	//private Product product;
+	
+	
 }

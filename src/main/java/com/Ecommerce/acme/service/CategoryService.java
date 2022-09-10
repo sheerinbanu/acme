@@ -17,6 +17,7 @@ public class CategoryService {
 	@Autowired
 	private CategoryRepository cr;
 	
+	
 	public Optional<Category> getCategory(final int id){
 		return cr.findById(id);
 	}
