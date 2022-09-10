@@ -1,39 +1,61 @@
-<html lang="fr" xmlns:th="http://www.thymeleaf.org/">
-    <head>
-        <meta charset="UTF-8">
-        <title>Acme Home</title>
-            <link th:href ="@{/css/bootstrap.min.css}" rel="stylesheet"/>
-    </head>
-    
-    <body>
-    
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <meta charset="utf-8">
+    <title>Congratulation you are register</title>
+    <link th:href ="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+</head>
+
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   		<div class="container-fluid">
    			 <a class="navbar-brand" href="#">ACME Professional Access</a>
+   			 
+   			 	<div class="collapse navbar-collapse" id="navbarColor01">
+     				
+     				 <ul class="navbar-nav me-auto">
+       					 <li class="nav-item">
+         					<a class="nav-link active" href="#">Accueil
+        		   				<span class="visually-hidden">(current)</span>
+        					</a>
+       	 				</li>
+        				<li class="nav-item">
+          					<a class="nav-link" href="#">Produits</a>
+       					</li>
+       					<li class="nav-item">
+          					<a class="nav-link" href="/profil">Profil</a>
+        				</li>
+        				<li class="nav-item">
+          					<a class="nav-link" href="#">Historique</a>
+        				</li>
+        				<li class="nav-item">
+         					<a class="nav-link active" href="/cart">Panier</a>
+       	 				</li>
+      				</ul>
+   
+    			</div>
   		</div>
  	</nav>
+ 	
+    <div class="container">
     
-    <div class="container"> 
-    
-        <div class="p-5">
-        	<h1 class="text-center">ACME Pro.</h1>
-        	
-  			<p class="text-center">SUCCESS CONEXION</p>
-        </div>  	
-   
-      <div class="row justify-content-center">
-  	 	
-  	 		
-  	 	<div class="col-6">
+     	<div class="row justify-content-center">
+     
+        	<div class="col-6 mt-3" sec:authorize="isAuthenticated()">
         
-         <form action="#" th:action="@{/logout}" method="post" >
- 			 <button type="submit" class="btn btn-primary">LogOut</button>
-		 </form>
-		 
-   		 </div>
-   		 
-   </div>
-   
- </div>
-    </body>  
+            	<form id="logoutForm" method="POST" th:action="@{/logout}">
+                	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+           		 </form>
+
+            <h2>Welcome <span sec:authentication="authorities[0]"></span> | <a onclick="document.forms['logoutForm'].submit()">Logout</a> </h2>
+      		
+      		</div>
+    
+    	 </div>    
+
+     </div>
+
+</body>
 </html>

@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org/">
     <head>
         <meta charset="UTF-8">
@@ -17,25 +18,26 @@
         <div class="p-5">
         	<h1 class="text-center">ACME Pro.</h1>
         	
-  			<p class="text-center">Welcome to you dear user. This web application is intended for the brand's sales representatives, so that they can place orders.</p>
+  			<p class="text-center">Welcome to you dear user.</p>
         </div>  	
    
    <div class="row justify-content-center">
   	 <div class="col-6">
         
-         <form action="#" th:action="@{/login}" th:object="${user}" method="post" >
+         <form class="form-signin" method="POST" th:action="@{/login}" >
          
   			<div class="mb-3">
-    			<label for="exampleInputEmail1" class="form-label">Email address</label>
-   				 <input class="form-control" placeholder="john@example.com" type="text" th:field="*{email}" required>
-   				 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+    			<span th:text="${message}"></span>
+                <input name="username" type="text" class="form-control" placeholder="Username" autofocus="true" />
   			</div>
   			
   			<div class="mb-3">
    				 <label for="exampleInputPassword1" class="form-label">Password</label>
-   				 <input type="password" th:field="*{password}" class="form-control" placeholder="********" required>
+   				  <input name="password" type="password" class="form-control" placeholder="Password" />
    				 <div id="passwordHelp" class="form-text">We'll never share your password with anyone else.</div>
  			 </div>
+ 			 
+ 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
   	
  			 <button type="submit" class="btn btn-primary">Submit</button>
 		
