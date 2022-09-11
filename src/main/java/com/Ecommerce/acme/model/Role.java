@@ -9,8 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import lombok.Data;
-
 
 @Entity
 @Table(name = "role")
@@ -50,7 +48,6 @@ public class Role {
 
 	public void setUsers(Set<User> users) {
 		this.users = users;
-	}
-    
+	}   
     
 }

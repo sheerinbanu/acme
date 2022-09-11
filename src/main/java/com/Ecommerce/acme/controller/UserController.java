@@ -42,6 +42,7 @@ public class UserController {
 
         if (bindingResult.hasErrors()) {
             return "registration";
+            
         }
 
         userService.save(userForm);
@@ -58,7 +59,7 @@ public class UserController {
         }
 
         if (error != null)
-            model.addAttribute("error", "Your username and password is invalid.");
+            model.addAttribute("error", "Your username or password is invalid.");
 
         if (logout != null)
             model.addAttribute("message", "You have been logged out successfully.");
@@ -68,12 +69,12 @@ public class UserController {
 
     @GetMapping({"/", "/home"})
     public String welcome(Model model) {
-        return "Homepage";
+        return "index";
     }
     
     @GetMapping({"/profil"})
     public String profil(Model model) {
-    	model.addAttribute("person", userService.findByUsername("commercial"));
+    	model.addAttribute("person", userService.findByType("commercial"));
         return "profil";
     }
 

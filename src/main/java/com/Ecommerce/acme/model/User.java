@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import lombok.Data;
 
 @Entity
 @Table(name= "user")
@@ -25,8 +24,12 @@ public class User {
 	
 	private String email;
 	
-	private String username;
+	private int margin_rate;
 	
+	private String type;
+	
+	private String username;
+
 	private String password;
 	
 	    @Transient
@@ -77,6 +80,22 @@ public class User {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	
+	public int getMargin_rate() {
+		return margin_rate;
+	}
+
+	public void setMargin_rate(int margin_rate) {
+		this.margin_rate = margin_rate;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public String getPassword() {

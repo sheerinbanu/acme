@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-
 import com.Ecommerce.acme.repository.ProductRepository;
 import com.Ecommerce.acme.service.CategoryService;
 import com.Ecommerce.acme.service.ProductService;
@@ -23,11 +21,10 @@ public class ProductController {
 	private ProductRepository pr;
 	
 	
-	
-	@GetMapping({"/","/Home"})
+	@GetMapping({"/products"})
 	public String HomePage(Model model) {
 		model.addAttribute("products", ps.getAllProduct());
-		return "HomePage";
+		return "products";
 		
 	}
 	

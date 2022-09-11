@@ -22,9 +22,4 @@ public class Category {
 	
 	private String name;
 	
-	//@JoinColumn()
-	//@ManyToOne(cascade = CascadeType.ALL)
-	//private Product product;
-	
-	
 }

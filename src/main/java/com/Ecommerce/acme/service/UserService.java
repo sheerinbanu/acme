@@ -11,5 +11,7 @@ public interface UserService {
     void saveAsAdmin(User user);
 
     User findByUsername(String username);    
+    
+    User findByType(String name);  
    
 }

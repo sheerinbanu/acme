@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Create an Admin</title>
+    <title>Création Compte Admin</title>
     <link th:href ="@{/css/bootstrap.min.css}" rel="stylesheet"/>
 </head>
 
@@ -15,17 +15,19 @@
   		</div>
  	</nav>
 
-	<div class="p-5">
-	
-        	<h1 class="text-center">ACME Pro.</h1>
-        
-     </div> 
+    <div class="container pb-5">
+    
+    <div class="p-5">
+        <h1 class="text-center">ACME Inscription Pro.</h1>
+  		<p class="text-center">Ce portail est destiné aux Admin de la marque, afin qu'ils puissent créer d'autre profil Administrateur.</p>
+     </div>
      
-    <div class="container">
+     <div class="row justify-content-center">
+  	 	<div class="col-6">
 
         <form method="POST" class="form-signin" th:object="${userForm}" th:action="@{/addAdmin}">
 
-           <h2 class="form-signin-heading">Create Admin account</h2>
+           <h2 class="form-signin-heading">Création Compte Admin </h2>
             
              <div class="form-group mb-3">
                 <input type="text" th:field="*{first_name}" class="form-control" placeholder="First Name" autofocus="true">       
@@ -38,6 +40,16 @@
             <div class="form-group mb-3">
                 <input type="text" th:field="*{email}" class="form-control" placeholder="Email" autofocus="true">       
             </div>
+            
+            <div class="form-group mb-3">
+                <input type="number" th:field="*{margin_rate}" class="form-control" autofocus="true">       
+            </div>
+            
+            <div class="form-group mb-3">
+    			<select class="form-control" th:field="*{type}" >
+      				<option th:value="'administrator'" th:text="Administator"></option>
+  			  	</select>
+  			</div>
             
             <div class="form-group mb-3">
                 <input type="text" th:field="*{username}" class="form-control" placeholder="Username" autofocus="true">
@@ -59,10 +71,13 @@
             <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
             
         </form>
-
-    </div>
-
-   
+      </div>
+   </div>
+ </div>
 </body>
-
+<footer class="bg-dark text-center text-white">
+  	<div class="text-center p-3 navbar-dark bg-primary"> © 2022 Copyright: 
+  		<a class="text-white" href="#">ACME.com</a>
+ 	</div>
+</footer>
 </html>

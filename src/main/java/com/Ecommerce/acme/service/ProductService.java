@@ -32,9 +32,6 @@ public class ProductService {
 	
 	public void insertProduct(Product Product) {
 		pr.save(Product);
-	}
-	
-	
-	
+	}	
 	
 }

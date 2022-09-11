@@ -7,4 +7,5 @@ import com.Ecommerce.acme.model.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer>{
 	User findByUsername(String username);
+	User findByType(String name);
 }
