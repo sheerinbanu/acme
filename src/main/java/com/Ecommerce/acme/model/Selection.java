@@ -21,7 +21,9 @@ public class Selection {
 	private int id_selection;
 	private int quantity;
 	private int size;
+	private double margin_price;
 	private double total;
+	private boolean status;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_product", referencedColumnName= "id_product", insertable = true, updatable = false)

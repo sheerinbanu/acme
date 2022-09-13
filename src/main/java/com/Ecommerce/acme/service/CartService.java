@@ -1,10 +1,8 @@
 package com.Ecommerce.acme.service;
 
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.Ecommerce.acme.model.Cart;
 import com.Ecommerce.acme.repository.CartRepository;
 
@@ -32,4 +30,5 @@ public class CartService {
 	public void insertCart(Cart Cart) {
 		cr.save(Cart);
 	}
+		
 }

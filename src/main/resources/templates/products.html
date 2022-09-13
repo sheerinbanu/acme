@@ -16,7 +16,7 @@
 			<div class="collapse navbar-collapse" id="navbarColor01">
 
 				<ul class="navbar-nav me-auto">
-					<li class="nav-item"><a class="nav-link active" href="/">Accueil</a>
+					<li class="nav-item"><a class="nav-link active" href="/home">Accueil</a>
 					</li>
 					<li class="nav-item"><a class="nav-link" href="/products">Produits</a>
 					</li>
@@ -24,7 +24,7 @@
 					</li>
 					<li class="nav-item"><a class="nav-link" href="#">Historique</a>
 					</li>
-					<li class="nav-item"><a class="nav-link active" href="/cart">Panier</a>
+					<li class="nav-item"><a class="nav-link" href="/cart">Panier</a>
 					</li>
 				</ul>
 			</div>
@@ -71,11 +71,11 @@
 					</div>
 				</div>
 
-				<img src="" th:src="${product.picture}" width="100%" height="100%" />
+				<img th:src="${product.picture}" width="100%" height="100%" />
 
 				<div class="card-body">
 
-					<p class="card-text">Visualisation du produit ACME.</p>
+					<p class="card-text" th:text="${product.description}"></p>
 					<div th:text="${product.category.name}"></div>
 
 				</div>
@@ -97,13 +97,9 @@
 								<option th:each="size :${sizeList}" th:text="${size}"></option>
 							</select>
 						</div>
-						
-						
-						
-						 <input type="hidden"  name="product" th:value="${product.id_product}" >
-						
-						 <p th:text="${product.id_product}"></p>
-						
+			
+						 <input type="hidden" name="product" th:value="${product.id_product}" >
+						 
 						<div class="row">
 							<button type="submit" class="btn btn-danger">Ajouter au
 								Panier</button>

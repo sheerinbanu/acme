@@ -20,7 +20,8 @@ public class Product {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id_product;
 	private String name;
-	private int unit_price;
+	private String description;
+	private Double unit_price;
 	private String picture;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

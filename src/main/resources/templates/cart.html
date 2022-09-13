@@ -18,7 +18,7 @@
      				
      				 <ul class="navbar-nav me-auto">
        					 <li class="nav-item">
-         					<a class="nav-link active" href="/">Accueil</a>
+         					<a class="nav-link active" href="/home">Accueil</a>
        	 				</li>
         				<li class="nav-item">
           					<a class="nav-link" href="/products">Produits</a>
@@ -30,7 +30,7 @@
           					<a class="nav-link" href="#">Historique</a>
         				</li>
         				 <li class="nav-item">
-         					<a class="nav-link active" href="/cart">Panier</a>
+         					<a class="nav-link" href="/cart">Panier</a>
        	 				</li>
       				</ul>
    
@@ -60,8 +60,6 @@
     </div> 
  	
 <section style="background-color: #eee;">
-
-<div th:text ="${data}"></div>
     
  <div class="container py-5">   
     	 
@@ -70,32 +68,30 @@
         <div class="col-md-9">
             <div class="ibox">
                 <div class="ibox-title">
-                    <span class="pull-right">(<strong>3</strong>) Produits</span>
                     <h5>Selection dans votre Panier</h5>
                 </div>
                 
-                <div class="ibox-content">
+                <form method="POST" class="form-signin" th:object="${cartForm}" th:action="@{/cart}">
+                
+                <div class="ibox-content" th:each="selection: ${selections}">
                     <div class="table-responsive">
                         <table class="table shoping-cart-table">
                             <tbody>
                             <tr>
                                 <td width="90">
                                     <div class="cart-product-imitation">
+                                    	<img th:src="${selection.product.picture}" width="75%" height="110%">
                                     </div>
+                                     
                                 </td>
                                 <td class="desc">
-                                    <h3>
-                                    <a href="#" class="text-navy">
-                                        Desktop publishing software
-                                    </a>
+                                    <h3> 
+                                    <a href="#" class="text-navy"  th:text="${selection.product.name}"></a>
                                     </h3>
-                                    <p class="small">
-                                        It is a long established fact that a reader will be distracted by the readable
-                                        content of a page when looking at its layout. The point of using Lorem Ipsum is
-                                    </p>
+                                    <p class="small" th:text="${selection.product.description}"></p>
                                     <dl class="small m-b-none">
-                                        <dt>Description lists</dt>
-                                        <dd>A description list is perfect for defining terms.</dd>
+                                        <dt>Pointure</dt>
+                                        <dd th:text="${selection.size}"></dd>
                                     </dl>
 
                                     <div class="m-t-sm">
@@ -104,16 +100,15 @@
                                 </td>
 
                                 <td>
-                                    $180,00
-                                    <s class="small text-muted">$230,00</s>
+                                    <h4 th:text="${selection.margin_price}"></h4>
+                                    <s class="small text-muted" th:text="${selection.product.unit_price}"></s>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" placeholder="1">
+                                    <input th:value="${selection.quantity}" class="form-control">
                                 </td>
                                 <td>
-                                    <h4>
-                                        $180,00
-                                    </h4>
+                                    <h4 th:text="${selection.total}"></h4>
+                                    <h5>€</h5>
                                 </td>
                             </tr>
                             </tbody>
@@ -121,15 +116,13 @@
                     </div>
                 </div>
                 
+                <input type="hidden" name="user" th:value="${person.id_user}" >
                 
-                
-                
-              
                 <div class="ibox-content">
-                    <button class="btn btn-primary pull-right"><i class="fa fa fa-shopping-cart"></i> Commander</button>
-                    <button class="btn btn-white"><i class="fa fa-arrow-left"></i> Continuer Achat</button>
-
+                    <button type="submit" class="btn btn-primary pull-right"><i class="fa fa fa-shopping-cart"></i> Commander</button>
+                    <a href="/products" class="btn btn-white"><i class="fa fa-arrow-left"></i> Continuer Achat</a>
                 </div>
+                </form>
                 
             </div>
         </div>
@@ -141,16 +134,16 @@
                 </div>
                 <div class="ibox-content">
                     <span>
-                        Total
+                        Total en Euro €
                     </span>
-                    <h2 class="font-bold">
-                        $390,00
-                    </h2>
-
+                    <h2 class="font-bold" th:text="${finalPrice}"></h2>					
+                    <hr>
+                    <span class="pull-right">(<strong th:text="${person.margin_rate}"></strong>) % Remise Commercial</span>
                     <hr>
                     <span class="text-muted small">
-                        *For United States, France and Germany applicable sales tax will be applied
+                        *Tous les prix appliqués sont HT.
                     </span>
+                    <hr>
                     <div class="m-t-sm">
                         <div class="btn-group">
                         <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-shopping-cart"></i> Commander</a>
@@ -165,9 +158,11 @@
                     <h5>Support</h5>
                 </div>
                 <div class="ibox-content text-center">
-                    <h3><i class="fa fa-phone"></i> +43 100 783 001</h3>
+                    <h3><i class="fa fa-phone"></i> +44 100 783 001</h3>
                     <span class="small">
-                        Please contact with us if you have any questions. We are avalible 24h.
+                    
+                    	Veuillez nous contacter si vous avez des questions. Notre plateforme est ouverte 24h/24h.
+              
                    	 </span>
                 	</div>
             	</div>

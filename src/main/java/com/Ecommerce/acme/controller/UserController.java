@@ -1,7 +1,9 @@
  package com.Ecommerce.acme.controller;
  
- import com.Ecommerce.acme.model.User;
- import com.Ecommerce.acme.service.SecurityService;
+ import com.Ecommerce.acme.model.Cart;
+import com.Ecommerce.acme.model.User;
+import com.Ecommerce.acme.service.CartService;
+import com.Ecommerce.acme.service.SecurityService;
  import com.Ecommerce.acme.service.UserService;
  import com.Ecommerce.acme.validator.UserValidator;
 
@@ -19,6 +21,9 @@ public class UserController {
 	
     @Autowired
     private UserService userService;
+    
+    @Autowired
+	private CartService cs;
 
     @Autowired
     private SecurityService securityService;
@@ -29,7 +34,7 @@ public class UserController {
     @GetMapping("/registration")
     public String registration(Model model) {
         if (securityService.isAuthenticated()) {
-            return "redirect:/";
+            return "redirect:/home";
         }
 
         model.addAttribute("userForm", new User());
@@ -56,7 +61,8 @@ public class UserController {
     @GetMapping("/login")
     public String login(Model model, String error, String logout) {
         if (securityService.isAuthenticated()) {
-            return "redirect:/";
+    		
+            return "redirect:/home";
         }
 
         if (error != null)
@@ -68,7 +74,7 @@ public class UserController {
         return "login";
     }
 
-    @GetMapping({"/", "/home"})
+    @GetMapping({"/home"})
     public String welcome(Model model) {
         return "index";
     }
