@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -37,14 +38,14 @@ public class CartController {
 	double sum = 0;
 	
 	  @GetMapping({"/cart"})
-	    public String getSelection(Model model) throws Exception {
+	    public String getSelection(Model model,Authentication authentication ) throws Exception {
 		  
 		  Connection con = DriverManager.getConnection("jdbc:mysql://localhost:8889/acme?useSSL=false", "root", "root");
 		  Statement st = con.createStatement();
 		  ResultSet res = st.executeQuery("SELECT SUM(total) FROM selection");
 		  	  
 		  model.addAttribute("selections", ss.getAllSelection());
-		  model.addAttribute("person", us.findByType("commercial"));
+		  model.addAttribute("person", us.findByUsername(authentication.getName()));
 		
 		  while (res.next()) { 
 			  sum = 0;

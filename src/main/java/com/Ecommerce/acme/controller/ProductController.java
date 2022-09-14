@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -64,6 +65,7 @@ public class ProductController {
 	double reduction;
 	double marginPrice;
 	double finalPrice;
+	int total;
 		
 	@GetMapping("/products")
     public String getHomePage(Model model) {
@@ -75,10 +77,11 @@ public class ProductController {
     }
 	
 	@PostMapping("/products")
-	public String submitSelectionForm(@ModelAttribute("selectionForm") Selection selection,User user, Product product, Model model, BindingResult bindingResult) {
+	public String submitSelectionForm(@ModelAttribute("selectionForm") Selection selection,User user, Product product, Authentication authentication, Model model, BindingResult bindingResult){
 		
+		int currentUser = us.findByUsername(authentication.getName()).getMargin_rate();
 		
-		Double marge = (40.0 / 100.0);
+		Double marge = (currentUser / 100.0);
 		reduction = (product.getUnit_price() * marge);
 		marginPrice = (product.getUnit_price() - reduction); 
 		Double totalSelection = (marginPrice * selection.getQuantity());
@@ -89,7 +92,7 @@ public class ProductController {
 		
 		ss.insertSelection(selection);
 		
-		System.out.print("bonjour" + user.getMargin_rate());
+		System.out.print("bonjour" + total);
 		
 		return "products";
 	}

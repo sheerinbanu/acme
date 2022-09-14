@@ -12,6 +12,5 @@ public interface UserService {
 
     User findByUsername(String username);    
     
-    User findByType(String name);  
    
 }

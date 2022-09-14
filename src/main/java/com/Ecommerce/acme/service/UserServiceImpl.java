@@ -1,6 +1,7 @@
 package com.Ecommerce.acme.service;
 
 import com.Ecommerce.acme.model.Role;
+import com.Ecommerce.acme.model.Selection;
 import com.Ecommerce.acme.model.User;
 import com.Ecommerce.acme.repository.RoleRepository;
 import com.Ecommerce.acme.repository.UserRepository;
@@ -44,10 +45,5 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByUsername(username);
     }
     
-    @Override
-    @Transactional
-    public User findByType(String name) {
-        return userRepository.findByType(name);
-    }
-    
+  
 }
