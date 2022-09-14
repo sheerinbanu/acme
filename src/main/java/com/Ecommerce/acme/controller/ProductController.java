@@ -16,28 +16,17 @@ public class ProductController {
 	@Autowired
 	private ProductService ps;
 	
-	@Autowired
-	private CategoryService cs;
-	
-	@Autowired
-	private ProductRepository pr;
-	
-	
 	
 	@GetMapping({"/","/Home"})
 	public String HomePage(Model model) {
 		
 		model.addAttribute("products", ps.getAllProduct());
 		
-		
-		
-		
-		
 		return "HomePage";
 		
 		//SELECT category.name FROM CATEGORY INNERJOIN  PRODUCT ON product.id_category=id.category.name;
-		
 	}
+	
 	
 	
 }

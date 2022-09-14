@@ -9,9 +9,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
 import lombok.Data;
 
 @Entity
@@ -25,9 +22,10 @@ public class Product {
 	private String name;
 	private float unit_price;
 	private String picture;
+	private String description;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_category", referencedColumnName= "id_category", insertable = false, updatable = false)
+	@JoinColumn(name = "id_category", referencedColumnName= "id_category", insertable = true, updatable = true)
 	//@Fetch(FetchMode.JOIN)
 	private Category category;
 }

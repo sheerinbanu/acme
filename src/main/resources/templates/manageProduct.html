@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+    <head>
+     <meta charset="UTF-8">
+    <link th:href ="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    </head>
+    
+    <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary" >
+  	<div class="container-fluid">
+    <div><img  src="" th:src="@{/images/acmelogoD.svg}" width="10%" height="10%"/></div>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Commandes
+            <span class="visually-hidden">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Collection</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Profils</a>
+        </li>
+        <a href="#" class="btn btn-outline-danger">Deconnexion</a>
+        <!--  <button type="button" class="btn btn-outline-danger">Deconnexion</button>-->   
+      </ul>
+       
+    </div>
+  </div>
+</nav>
+    </header>
+    
+<body>
+	<div class="d-flex justify-content-around mt-5 mb-5 ">
+		<div class="table-responsive">
+			<form class="d-flex">
+		        <input class="form-control me-sm-2" type="text" placeholder="rechercher des produits">
+		        <button class="btn btn-secondary my-2 my-sm-0" type="submit">rechercher</button>
+		      </form>
+	    </div>
+		 <div><a href="/addProduct" class="btn btn-outline-success">+ Ajouter un produit</a></div>
+	</div>
+
+
+<div class="container">
+    <div class="table-responsive">
+	<table class="table table-hover">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">&#11036</th>
+      <th scope="col">Produits</th>
+      <th scope="col">Images</th>
+      <th scope="col">Editer</th>
+      <th scope="col">Archiver</th>
+    </tr>
+  </thead>
+  <tbody>
+  	
+    <tr class="table-active" th:each="product: ${products}">
+      <th scope="row">&#11036</th>
+      <td th:text="${product.name}">
+      <td> <img  src="" th:src="@{'/images/'+ ${product.picture}}" width="10%" height="10%"/> </td>
+      <td><button type="button" class="btn btn-success">&#9999</button></td>
+      <td><a href="/archive" class="btn btn-warning">Archiver</a>
+    </tr>
+    
+        
+  </tbody>
+</table>
+</div>
+</div>
+
+</body>
+
+</html>
