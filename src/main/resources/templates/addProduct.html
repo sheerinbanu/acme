@@ -49,33 +49,29 @@
 
 	 	 <div class="card-header">Ajouter un produit</div>
 	  
-	<form th:action="@{/addProduct}" th:object="${productForm}" method="POST">
-			<div>
+	<form th:action="@{/addProduct}" th:object="${product}" method="POST">
 			
+						
 			<div class="form-group">
 			<label for="name">Nom</label>
 			<input type="text" th:field="*{name}" class="form-control"/>
+			<input type="hidden" th:field="*{id_product}" class="form-control"/>
 			</div>
-		    </div> 
+		    
 	  
 		    <div>
 			<label for="unit_price">Prix Unitaire</label>
 			<input type="number" step="0.01" th:field="*{unit_price}" class="form-control" placeholder="prix">
 		    </div>
 		  
-		   <div>
-		  		  
+		   		  		  
 		   <select th:field="*{category}" class="custom-select">
 		   <option value="" selected>choisir</option>
 			  <option th:each="category: ${categories}"
 			          th:value="${category.id_category}"	
 			  		  th:text="${category.name}">
-				 </select>
-		</div>
-		 
-		  
-		  
-			
+		  </select>
+					
 			  <div class="form-group">
 			    <label for="picture">Image</label>
 			    <input type="text" th:field="*{picture}"class="form-control" id="exampleFormControlFile1">
@@ -87,11 +83,14 @@
 			<!-- <a class="btn btn-primary">Enregistrer</a>-->
 		  
 		   <input type="submit" class="btn btn-primary" value="Enregistrer">
+		   <input type="hidden" th:field="*{id_product}" />
 	</form>  
+	
+	
 	  </div>
   
   
-  
+  <div><a th:href="@{/manageProduct}">Retour</a></div>
   
   
   

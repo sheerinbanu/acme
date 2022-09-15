@@ -52,20 +52,28 @@
   <thead class="table-dark">
     <tr>
       <th scope="col">&#11036</th>
-      <th scope="col">Produits</th>
-      <th scope="col">Images</th>
+      <th>Id</th>
+      <th scope="col">Produit</th>
+      <th scope="col">Image</th>
       <th scope="col">Editer</th>
-      <th scope="col">Archiver</th>
+      <th scope="col">Supprimer</th>
     </tr>
   </thead>
   <tbody>
   	
     <tr class="table-active" th:each="product: ${products}">
       <th scope="row">&#11036</th>
+      <th th:text="${product.id_product}">
       <td th:text="${product.name}">
       <td> <img  src="" th:src="@{'/images/'+ ${product.picture}}" width="10%" height="10%"/> </td>
-      <td><button type="button" class="btn btn-success">&#9999</button></td>
-      <td><a href="/archive" class="btn btn-warning">Archiver</a>
+      
+      <td>
+      <!--  <button type="button" class="btn btn-success">&#9999</button>-->
+      <a th:href="@{'/showUpdateForm/' + ${product.id_product}}" class="btn btn-success" role="button">&#9999</a>
+      </td>
+
+           
+      <td><a th:href="@{'/delete/' + ${product.id_product}}" class="btn btn-warning" role="button">Supprimer</a></td>
     </tr>
     
         
