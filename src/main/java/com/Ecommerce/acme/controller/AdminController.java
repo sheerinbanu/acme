@@ -40,7 +40,7 @@ public class AdminController {
 	}
 	
 	@GetMapping("/addProduct")
-    public ModelAndView AddProduct(Model model, @ModelAttribute("productForm")Product product){
+    public ModelAndView AddProduct(Model model, @ModelAttribute("product")Product product){
         ModelAndView mav = new ModelAndView("addProduct");
         model.addAttribute("categories", cs.getAllCategory());
         mav.addObject("addProduct");
@@ -48,12 +48,11 @@ public class AdminController {
     }
 
 	@PostMapping("/addProduct")
-	 public String Register(@ModelAttribute("productForm") Product product, BindingResult bindingResult){
+	 public String Register(@ModelAttribute("product") Product product, BindingResult bindingResult){
 //		System.out.println(product.getCategory());
 //		product.setCategory(category);
 		ps.insertProduct(product);
-		
-        return "redirect:/manageProduct";
+		return "redirect:/manageProduct";
     }
 	
 
@@ -73,8 +72,7 @@ public class AdminController {
 	
 			
 	@GetMapping("/showUpdateForm/{id}")
-		public String ShowUpdateForm(Model model, @ModelAttribute("productForm")Product product, @PathVariable(name = "id")  int productId, BindingResult bindingResult){
-
+		public String ShowUpdateForm(Model model, @ModelAttribute("product")Product product, @PathVariable(name = "id")  int productId, BindingResult bindingResult){
 
 			Optional<Product> product1 = ps.getProduct(productId);
 			System.out.println(product1.get().getName());
