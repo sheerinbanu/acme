@@ -1,12 +1,8 @@
 package com.Ecommerce.acme.controller;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -15,8 +11,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import com.Ecommerce.acme.model.Cart;
 import com.Ecommerce.acme.model.Product;
 import com.Ecommerce.acme.model.Selection;
 import com.Ecommerce.acme.model.User;
@@ -65,7 +59,6 @@ public class ProductController {
 	double reduction;
 	double marginPrice;
 	double finalPrice;
-	int total;
 		
 	@GetMapping("/products")
     public String getHomePage(Model model) {
@@ -79,9 +72,10 @@ public class ProductController {
 	@PostMapping("/products")
 	public String submitSelectionForm(@ModelAttribute("selectionForm") Selection selection,User user, Product product, Authentication authentication, Model model, BindingResult bindingResult){
 		
-		int currentUser = us.findByUsername(authentication.getName()).getMargin_rate();
+		int currentUserMarge = us.findByUsername(authentication.getName()).getMargin_rate();
+		int currentUserId = us.findByUsername(authentication.getName()).getId_user();
 		
-		Double marge = (currentUser / 100.0);
+		Double marge = (currentUserMarge / 100.0);
 		reduction = (product.getUnit_price() * marge);
 		marginPrice = (product.getUnit_price() - reduction); 
 		Double totalSelection = (marginPrice * selection.getQuantity());
@@ -89,12 +83,11 @@ public class ProductController {
 		selection.setMargin_price(marginPrice);
 		selection.setTotal(totalSelection);
 		selection.setStatus(false);
+		selection.setId_user(currentUserId);
 		
 		ss.insertSelection(selection);
 		
-		System.out.print("bonjour" + total);
-		
-		return "products";
+		return "redirect:/products";
 	}
 	
 	
