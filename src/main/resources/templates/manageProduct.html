@@ -15,18 +15,19 @@
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link active" href="#">Commandes
-            <span class="visually-hidden">(current)</span>
+          <a class="nav-link " href="#">Commandes
+            
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" >Collection</a>
+          <a class="nav-link active" >Collection</a>
+          <span class="visually-hidden">(current)</span>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Profils</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/manageCategory">categories</a>
+          <a class="nav-link" href="/admin/manage_category">categories</a>
         </li>
         <a href="#" class="btn btn-outline-danger">Deconnexion</a>
         <!--  <button type="button" class="btn btn-outline-danger">Deconnexion</button>-->   
@@ -45,7 +46,7 @@
 		        <button class="btn btn-secondary my-2 my-sm-0" type="submit">rechercher</button>
 		      </form>
 	    </div>
-		 <div><a href="/addProduct" class="btn btn-outline-success">+ Ajouter un produit</a></div>
+		 <div><a href="/admin/add_product" class="btn btn-outline-success">+ Ajouter un produit</a></div>
 	</div>
 
 
@@ -54,7 +55,6 @@
 	<table class="table table-hover">
   <thead class="table-dark">
     <tr>
-      <th scope="col">&#11036</th>
       <th>Id</th>
       <th scope="col">Produit</th>
       <th scope="col">Image</th>
@@ -65,18 +65,19 @@
   <tbody>
   	
     <tr class="table-active" th:each="product: ${products}">
-      <th scope="row">&#11036</th>
+      
       <th th:text="${product.id_product}">
       <td th:text="${product.name}">
-      <td> <img  src="" th:src="@{'/images/'+ ${product.picture}}" width="10%" height="10%"/> </td>
+      
+      <td> <img  src="" th:src="@{'/images/'+ ${product.picture}}" width="10%" height="10%"/> </td> 
       
       <td>
       <!--  <button type="button" class="btn btn-success">&#9999</button>-->
-      <a th:href="@{'/updateProduct/' + ${product.id_product}}" class="btn btn-success" role="button">&#9999</a>
+      <a th:href="@{'/admin/update_product/' + ${product.id_product}}" class="btn btn-success" role="button">&#9999</a>
       </td>
 
            
-      <td><a th:href="@{'/delete/' + ${product.id_product}}" class="btn btn-warning" role="button">Supprimer</a></td>
+      <td><a th:href="@{'/admin/delete_product/' + ${product.id_product}}" class="btn btn-warning" role="button">Supprimer</a></td>
     </tr>
     
         

@@ -32,13 +32,13 @@ public class AdminController {
 	private CategoryService cs;
 		
 	
-	@GetMapping("/manageProduct")
+	@GetMapping("/admin/manage_product")
 	public String ManageController(Model model){
 		model.addAttribute("products", ps.getAllProduct());
 		return "manageProduct";
 	}
 	
-	@GetMapping("/addProduct")
+	@GetMapping("/admin/add_product")
     public ModelAndView AddProduct(Model model, @ModelAttribute("product")Product product){
         ModelAndView mav = new ModelAndView("addProduct");
         model.addAttribute("categories", cs.getAllCategory());
@@ -46,24 +46,24 @@ public class AdminController {
         return mav;
     }
 
-	@PostMapping("/addProduct")
+	@PostMapping("/admin/add_product")
 	 public String RegisterProduct(@ModelAttribute("product") Product product, BindingResult bindingResult){
 //		System.out.println(product.getCategory());
 //		product.setCategory(category);
 		ps.insertProduct(product);
-		return "redirect:/manageProduct";
+		return "redirect:/admin/manage_product";
     }
 	
 
 	//Handler method for deleting a product from the application when it is no longer needed
-	@GetMapping("/delete/{id}")
+	@GetMapping("/admin/delete_product/{id}")
 		public String DeleteProduct(@PathVariable(name = "id") int id) {
 			ps.deleteProduct(id);
-			return "redirect:/manageProduct";
+			return "redirect:/admin/manage_product";
 	}
 	
 			
-	@GetMapping("/updateProduct/{id}")
+	@GetMapping("/admin/update_product/{id}")
 		public String UpdateProduct(Model model, @ModelAttribute("product")Product product, @PathVariable(name = "id")  int productId, BindingResult bindingResult){
 			Optional<Product> product1 = ps.getProduct(productId);
 		//	System.out.println(product1.get().getName());
@@ -73,34 +73,34 @@ public class AdminController {
 			return "addProduct";
 	}
 	
-	@GetMapping("/manageCategory")
+	@GetMapping("/admin/manage_category")
 	public String ManageCategory(Model model){
 		model.addAttribute("categories", cs.getAllCategory());
 		return "manageCategory";
 	}
 	
-	@GetMapping("/addCategory")
+	@GetMapping("/admin/add_category")
     public ModelAndView AddCategory(Model model, @ModelAttribute("category")Category category){
            ModelAndView mav = new ModelAndView("addCategory");
            mav.addObject("addCategory");
            return mav;
     }
 
-	@PostMapping("/addCategory")
+	@PostMapping("/admin/add_category")
 	 public String RegisterCategory(@ModelAttribute("category") Category category, BindingResult bindingResult){
 //		System.out.println(product.getCategory());
 //  	product.setCategory(category);
 		cs.insertCategory(category);
-		return "redirect:/manageCategory";
+		return "redirect:/admin/manage_category";
     }
 	
-	@GetMapping("/deleteCat/{id}")
+	@GetMapping("/admin/delete_category/{id}")
 	public String DeleteCategory(@PathVariable(name = "id") int id) {
 		cs.deleteCategory(id);
-		return "redirect:/manageCategory";
+		return "redirect:/admin/manage_category";
 	}
 	
-	@GetMapping("/updateCategory/{id}")
+	@GetMapping("/admin/update_category/{id}")
 	public String updateCategory(Model model, @ModelAttribute("category")Category category, @PathVariable(name = "id")  int id_category, BindingResult bindingResult){
 		Optional<Category> category1 = cs.getCategory(id_category);
 	//	System.out.println(product1.get().getName());

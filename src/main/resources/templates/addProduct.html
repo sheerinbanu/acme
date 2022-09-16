@@ -16,12 +16,12 @@
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link active" href="#">Commandes
+          <a class="nav-link " href="#">Commandes
             <span class="visually-hidden">(current)</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Collection</a>
+          <a class="nav-link active" href="#">Collection</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Profils</a>
@@ -45,7 +45,7 @@
 		<div class="card border-primary mb-5 d-flex justify-content-around" style="max-width: 40rem;">
     	 <div class="card-header">Ajouter un produit</div>
 	  
-	<form th:action="@{/addProduct}" th:object="${product}" method="POST">
+	<form th:action="@{/admin/add_product}" th:object="${product}" method="POST">
 			
 			<div class="form-group">
 			<label for="name">Nom</label>
@@ -68,7 +68,9 @@
 					
 			  <div class="form-group">
 			    <label for="picture">Image</label>
-			    <input type="text" th:field="*{picture}"class="form-control" id="exampleFormControlFile1">
+			    <img src="..."  class="img-fluid" alt="shoes">
+			     <img  src="" th:src="@{'/images/'+ ${product.picture}}" width="100%" height="100%"/>  
+			   <!--  <input type="text" th:field="*{picture}"class="form-control" id="exampleFormControlFile1">--> 
 			  </div>
 			
 			
@@ -84,7 +86,7 @@
 	  </div>
   
   
-  <div><a th:href="@{/manageProduct}">Retour</a></div>
+  <div><a th:href="@{/admin/manage_product}">Retour</a></div>
   
   
   

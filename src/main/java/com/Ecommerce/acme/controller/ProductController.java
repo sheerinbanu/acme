@@ -17,12 +17,10 @@ public class ProductController {
 	private ProductService ps;
 	
 	
-	@GetMapping({"/","/Home"})
-	public String HomePage(Model model) {
-		
+	@GetMapping("/home")
+	public String Home(Model model) {
 		model.addAttribute("products", ps.getAllProduct());
-		
-		return "HomePage";
+		return "home";
 		
 		//SELECT category.name FROM CATEGORY INNERJOIN  PRODUCT ON product.id_category=id.category.name;
 	}

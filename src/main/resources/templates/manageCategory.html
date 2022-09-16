@@ -15,18 +15,18 @@
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link active" href="#">Commandes
-            <span class="visually-hidden">(current)</span>
-          </a>
+          <a class="nav-link " href="#">Commandes
+           </a>
         </li>
         <li class="nav-item">
-          <a href="/manageProduct" class="nav-link" >Collection</a>
+          <a href="/admin/manage_product" class="nav-link" >Collection</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Profils</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/manageCategory">categories</a>
+          <a class="nav-link active" href="/admin/manage_category">categories</a>
+          <span class="visually-hidden">(current)</span>
         </li>
         <a href="#" class="btn btn-outline-danger">Deconnexion</a>
         <!--  <button type="button" class="btn btn-outline-danger">Deconnexion</button>-->   
@@ -45,7 +45,7 @@
 		        <button class="btn btn-secondary my-2 my-sm-0" type="submit">rechercher</button>
 		      </form>
 	    </div>
-		 <div><a href="/addCategory" class="btn btn-outline-success">+ Ajouter une categorie</a></div>
+		 <div><a href="/admin/add_category" class="btn btn-outline-success">+ Ajouter une categorie</a></div>
 	</div>
 
 
@@ -54,7 +54,7 @@
 	<table class="table table-hover">
   <thead class="table-dark">
     <tr>
-      <th scope="col">&#11036</th>
+      
       <th>Id</th>
       <th scope="col">Categorie</th>
       <th></th>
@@ -65,17 +65,17 @@
   <tbody>
   	
     <tr class="table-active" th:each="category: ${categories}">
-      <th scope="row">&#11036</th>
+      
       <th th:text="${category.id_category}">
       <td th:text="${category.name}">
       <td></td>
       
       <td>
       <!--  <button type="button" class="btn btn-success">&#9999</button>-->
-      <a th:href="@{'/updateCategory/' + ${category.id_category}}" class="btn btn-success" role="button">&#9999</a>
+      <a th:href="@{'/admin/update_category/' + ${category.id_category}}" class="btn btn-success" role="button">&#9999</a>
       </td>
           
-      <td><a th:href="@{'/deleteCat/' + ${category.id_category}}" class="btn btn-warning" role="button">Supprimer</a></td>
+      <td><a th:href="@{'/admin/delete_category/' + ${category.id_category}}" class="btn btn-warning" role="button">Supprimer</a></td>
     </tr>
     
         
