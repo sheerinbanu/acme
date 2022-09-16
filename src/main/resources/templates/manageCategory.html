@@ -20,7 +20,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" >Collection</a>
+          <a href="/manageProduct" class="nav-link" >Collection</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Profils</a>
@@ -45,7 +45,7 @@
 		        <button class="btn btn-secondary my-2 my-sm-0" type="submit">rechercher</button>
 		      </form>
 	    </div>
-		 <div><a href="/addProduct" class="btn btn-outline-success">+ Ajouter un produit</a></div>
+		 <div><a href="/addCategory" class="btn btn-outline-success">+ Ajouter une categorie</a></div>
 	</div>
 
 
@@ -56,27 +56,26 @@
     <tr>
       <th scope="col">&#11036</th>
       <th>Id</th>
-      <th scope="col">Produit</th>
-      <th scope="col">Image</th>
+      <th scope="col">Categorie</th>
+      <th></th>
       <th scope="col">Editer</th>
       <th scope="col">Supprimer</th>
     </tr>
   </thead>
   <tbody>
   	
-    <tr class="table-active" th:each="product: ${products}">
+    <tr class="table-active" th:each="category: ${categories}">
       <th scope="row">&#11036</th>
-      <th th:text="${product.id_product}">
-      <td th:text="${product.name}">
-      <td> <img  src="" th:src="@{'/images/'+ ${product.picture}}" width="10%" height="10%"/> </td>
+      <th th:text="${category.id_category}">
+      <td th:text="${category.name}">
+      <td></td>
       
       <td>
       <!--  <button type="button" class="btn btn-success">&#9999</button>-->
-      <a th:href="@{'/updateProduct/' + ${product.id_product}}" class="btn btn-success" role="button">&#9999</a>
+      <a th:href="@{'/updateCategory/' + ${category.id_category}}" class="btn btn-success" role="button">&#9999</a>
       </td>
-
-           
-      <td><a th:href="@{'/delete/' + ${product.id_product}}" class="btn btn-warning" role="button">Supprimer</a></td>
+          
+      <td><a th:href="@{'/deleteCat/' + ${category.id_category}}" class="btn btn-warning" role="button">Supprimer</a></td>
     </tr>
     
         

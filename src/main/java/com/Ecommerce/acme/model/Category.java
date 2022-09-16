@@ -1,15 +1,13 @@
 package com.Ecommerce.acme.model;
 
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-
 import javax.persistence.Table;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter.DEFAULT;
-
 import lombok.Data;
 
 @Entity
@@ -20,13 +18,8 @@ public class Category {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id_category; 
-	
-	
 	private String name;
 	
-	//@JoinColumn()
-	//@ManyToOne(cascade = CascadeType.ALL)
-	//private Product product;
 	
 	
 }
