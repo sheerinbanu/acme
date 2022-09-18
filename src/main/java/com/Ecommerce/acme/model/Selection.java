@@ -23,11 +23,16 @@ public class Selection {
 	private int size;
 	private double margin_price;
 	private double total;
-	private boolean status;
+	private int id_user;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_product", referencedColumnName= "id_product", insertable = true, updatable = false)
 	private Product product;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_cart", referencedColumnName= "id_cart", insertable = true, updatable = true)
+	private Cart cart;
+
 	
 	
 }

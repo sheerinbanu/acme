@@ -5,4 +5,5 @@ import com.Ecommerce.acme.model.Cart;
 
 public interface CartRepository extends JpaRepository<Cart, Integer>{
 
+
 }

@@ -19,7 +19,9 @@ public class SelectionService {
 	}
 
 	public Iterable<Selection> getAllSelection() {
-		return ss.findAll();
+		
+			return ss.findAll();
+		
 	}
 
 	public void deleteSelection(final int id) {
@@ -28,6 +30,7 @@ public class SelectionService {
 	
 	public void insertSelection(Selection Selection) {
 		ss.save(Selection);
-	}	
+	}
+	
 	
 }

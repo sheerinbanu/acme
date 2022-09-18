@@ -3,43 +3,46 @@ package com.Ecommerce.acme.model;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import com.Ecommerce.acme.model.Role;
 
 @Entity
 @Table(name= "user")
 public class User {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id_user;
-	
+
 	private String last_name;
-	
+
 	private String first_name;
-	
+
 	private String email;
-	
+
 	private int margin_rate;
-	
+
 	private String type;
-	
+
 	private String username;
 
 	private String password;
-	
-	    @Transient
-	    private String passwordConfirm;
 
-	    @ManyToMany
-	    private Set<Role> roles;
+	@Transient
+	private String passwordConfirm;
+
+	@Enumerated(EnumType.STRING)
+	private Role role;
 
 	public User() {
-		
+
 	}
 
 	public int getId_user() {
@@ -81,7 +84,7 @@ public class User {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
+
 	public int getMargin_rate() {
 		return margin_rate;
 	}
@@ -114,13 +117,21 @@ public class User {
 		this.passwordConfirm = passwordConfirm;
 	}
 
-	public Set<Role> getRoles() {
-		return roles;
+	public Role getRole() {
+		return role;
 	}
 
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
+	public void setRole(Role role) {
+		this.role = role;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		String result = String.format(
+				"Category[id=%d, name='%s']%n",
+				id_user, username);
+
+		return result;
+	}
+
 }

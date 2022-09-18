@@ -1,53 +1,23 @@
 package com.Ecommerce.acme.model;
 
-import java.util.Set;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+public enum Role {
+	CLIENT("CLIENT"), ADMIN("ADMIN");
 
+	private String text;
 
-@Entity
-@Table(name = "role")
-public class Role {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+	private Role(String text) {
 
-    private String name;
-
-    @ManyToMany(mappedBy = "roles")
-    private Set<User> users;
-    
-    public Role() {
-    	
-    }
-
-	public int getId() {
-		return id;
+		this.text = text;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+
+	public String getText() {
+		return text;
 	}
 
-	public String getName() {
-		return name;
-	}
+	public void setText(String text) {
+		this.text = text;
+	} 
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Set<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(Set<User> users) {
-		this.users = users;
-	}   
-    
 }

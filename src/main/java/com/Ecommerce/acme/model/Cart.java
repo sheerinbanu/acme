@@ -20,7 +20,6 @@ public class Cart {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id_cart;
 	private Double total_price;
-	private boolean validate;
 
 	
 	@ManyToOne(fetch = FetchType.LAZY)

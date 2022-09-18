@@ -9,10 +9,10 @@ import lombok.Data;
 @Table(name= "category")
 @Data
 public class Category {
-	
+
 	@Id
 	private int id_category;
-	
+
 	private String name;
-	
+
 }

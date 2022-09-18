@@ -1,12 +1,9 @@
- package com.Ecommerce.acme.controller;
- 
- 
+package com.Ecommerce.acme.controller;
+
 import com.Ecommerce.acme.model.User;
 import com.Ecommerce.acme.service.AuthService;
-import com.Ecommerce.acme.service.CartService;
 import com.Ecommerce.acme.service.UserService;
 import com.Ecommerce.acme.validator.UserValidator;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -16,64 +13,64 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
- 
+
 @Controller
 public class UserController {
-	
-    @Autowired
-    private UserService userService;
-    
-    @Autowired
-    private AuthService authService;
-    
-    @Autowired
-    private UserValidator userValidator;
 
-    @GetMapping("/registration")
-    public String registration(Model model) {
+	@Autowired
+	private UserService userService;
 
-        model.addAttribute("userForm", new User());
+	@Autowired
+	private AuthService authService;
 
-        return "registration";
-    }
+	@Autowired
+	private UserValidator userValidator;
 
-    @PostMapping("/registration")
-    public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult) {
-        userValidator.validate(userForm, bindingResult);
+	@GetMapping("/registration")
+	public String registration(Model model) {
 
-        if (bindingResult.hasErrors()) {
-            return "registration";
-            
-        }
+		model.addAttribute("userForm", new User());
 
-        authService.createNewUser(userForm);
+		return "registration";
+	}
+
+	@PostMapping("/registration")
+	public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult) {
+		userValidator.validate(userForm, bindingResult);
+
+		if (bindingResult.hasErrors()) {
+			return "registration";
+
+		}
+
+		authService.createNewUser(userForm);
 
 
-        return "redirect:/login";
-    }
+		return "redirect:/login";
+	}
 
-    @GetMapping("/login")
-    public String login(Model model, String error, String logout) {
+	@GetMapping("/login")
+	public String login(Model model, String error, String logout) {
 
-        if (error != null)
-            model.addAttribute("error", "Your username or password is invalid.");
+		if (error != null)
+			model.addAttribute("error", "Your username or password is invalid.");
 
-        if (logout != null)
-            model.addAttribute("message", "You have been logged out successfully.");
+		if (logout != null)
+			model.addAttribute("message", "You have been logged out successfully.");
 
-        return "login";
-    }
+		return "login";
+	}
 
-    @GetMapping({"/home"})
-    public String welcome(Model model) {
-        return "index";
-    }
-    
-    @GetMapping({"/profil"})
-    public String profil(Model model, Authentication authentication) {
-    	model.addAttribute("person", userService.findByUsername(authentication.getName()));
-        return "profil";
-    }
+	@GetMapping({"/home"})
+	public String welcome(Model model) {
+		return "index";
+	}
 
-   
+	@GetMapping({"/profil"})
+	public String profil(Model model, Authentication authentication) {
+		model.addAttribute("person", userService.findByUsername(authentication.getName()));
+		return "profil";
+	}
+
+
 }
