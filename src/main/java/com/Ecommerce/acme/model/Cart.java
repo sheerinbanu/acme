@@ -1,5 +1,6 @@
 package com.Ecommerce.acme.model;
 
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -13,7 +14,6 @@ public class Cart {
 
 	@Id
 	private int id_cart;
-	
 	private int quantity;
 	private int size;
 	private float total_price;

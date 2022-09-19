@@ -14,28 +14,28 @@ import lombok.Data;
 @Entity
 @Table(name= "user")
 public class User {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id_user;
-	
+
 	private String last_name;
-	
+
 	private String first_name;
-	
+
 	private String email;
-	
+
 	private String password;
-	
-	
+
+
 	public User() {
-		
+
 	}
 
 	public User(String email, String password) {
-		
+
 		this.email = email;
 		this.password = password;
 	}
-	
+
 }
