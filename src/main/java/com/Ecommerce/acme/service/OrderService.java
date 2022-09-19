@@ -46,8 +46,6 @@ public class OrderService {
 		
 		int currentUserId = us.findByUsername(authentication.getName()).getId_user();
 		
-		//String test = "test";
-		
 		ArrayList<Order> orderList = new ArrayList<Order>();
 		ArrayList<Selection> detailsList = new ArrayList<Selection>();
 
@@ -69,9 +67,8 @@ public class OrderService {
 
 		model.addAttribute("orders", orderList);
 		model.addAttribute("details", detailsList);
-		//model.addAttribute("test", test );
+		
 		return "order";
 	}
-	
-	
+		
 }

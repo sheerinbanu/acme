@@ -1,52 +1,55 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org/">
-    <head>
-        <meta charset="UTF-8">
-        <title>Connexion</title>
-        <link th:href ="@{/css/bootstrap.min.css}" rel="stylesheet"/>
-    </head>
-    
-    <body>
-    
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  		<div class="container-fluid">
-   			 <a class="navbar-brand" href="#">ACME Gestion Pro.</a>
-  		</div>
- 	</nav>
-    
-    <div class="container"> 
-    
-        <div class="p-5">
-        	<h1 class="text-center">ACME Pro.</h1>
-  			<p class="text-center">Bienvenue cher Collaborateur</p>
-        </div>  	
-   
-   <div class="row justify-content-center">
-  	 <div class="col-6">
-        
-         <form class="form-signin" method="POST" th:action="@{/login}" >
-         
-  			<div class="mb-3">
-    			<span class="text-center" th:text="${message}"></span>
-    			<span th:text="${error}"></span>
-                <input name="username" type="text" class="form-control" placeholder="Username" autofocus="true" />
-  			</div>
-  			
-  			<div class="mb-3">
-   				 <label for="exampleInputPassword1" class="form-label">Password</label>
-   				  <input name="password" type="password" class="form-control" placeholder="Password" />
-   				 <div id="passwordHelp" class="form-text">We'll never share your password with anyone else.</div>
- 			 </div>
- 			 
- 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-  	
- 			 <button type="submit" class="btn btn-primary">Submit</button>
-		
-		 </form>
-		 
-   	 </div>
-   </div>
- 
- </div>
-    </body>  
+<head>
+<meta charset="UTF-8">
+<title>Connexion</title>
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+</head>
+
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">ACME Gestion Pro.</a>
+		</div>
+	</nav>
+
+	<div class="container">
+
+		<div class="p-5">
+			<h1 class="text-center">ACME Pro.</h1>
+			<p class="text-center">Bienvenue cher Collaborateur</p>
+		</div>
+
+		<div class="row justify-content-center">
+			<div class="col-6">
+
+				<form class="form-signin" method="POST" th:action="@{/login}">
+
+					<div class="mb-3">
+						<span class="text-center" th:text="${message}"></span> <span
+							th:text="${error}"></span> <input name="username" type="text"
+							class="form-control" placeholder="Username" autofocus="true" />
+					</div>
+
+					<div class="mb-3">
+						<label for="exampleInputPassword1" class="form-label">Password</label>
+						<input name="password" type="password" class="form-control"
+							placeholder="Password" />
+						<div id="passwordHelp" class="form-text">We'll never share
+							your password with anyone else.</div>
+					</div>
+
+					<input type="hidden" name="${_csrf.parameterName}"
+						value="${_csrf.token}" />
+
+					<button type="submit" class="btn btn-primary">Submit</button>
+
+				</form>
+
+			</div>
+		</div>
+
+	</div>
+</body>
 </html>
