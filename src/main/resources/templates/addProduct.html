@@ -66,12 +66,12 @@
 			  		  th:text="${category.name}">
 		  </select>
 					
+			 
+			  
 			  <div class="form-group">
-			    <label for="picture">Image</label>
-			    <img src="..."  class="img-fluid" alt="shoes">
-			     <img  src="" th:src="@{'/images/'+ ${product.picture}}" width="100%" height="100%"/>  
-			   <!--  <input type="text" th:field="*{picture}"class="form-control" id="exampleFormControlFile1">--> 
-			  </div>
+			<label for="name">URL</label>
+			<input type="text" th:field="*{picture}" class="form-control"/>
+			</div>
 			
 			
 			<div><label for="description"  >Description</label><textarea th:field="*{description}"></textarea></div>

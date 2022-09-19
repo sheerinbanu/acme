@@ -69,7 +69,7 @@
       <th th:text="${product.id_product}">
       <td th:text="${product.name}">
       
-      <td> <img  src="" th:src="@{'/images/'+ ${product.picture}}" width="10%" height="10%"/> </td> 
+      <td> <img  th:src="@{${product.picture}}" width="10%" height="10%"/> </td> 
       
       <td>
       <!--  <button type="button" class="btn btn-success">&#9999</button>-->
