@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+</head>
+<header>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		<div class="container-fluid">
+			<div>
+				<img src="" th:src="@{/images/acmelogoD.svg}" width="10%"
+					height="10%" />
+			</div>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+				aria-controls="navbarColor01" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarColor01">
+				<ul class="navbar-nav me-auto">
+					<li class="nav-item"><a class="nav-link active"
+						href="/admin/manage_order">Commandes</a> <span
+						class="visually-hidden">(current)</span></li>
+					<li class="nav-item"><a class="nav-link"
+						href="/admin/manage_product">Collection</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="/admin/manage_user">Profils</a></li>
+					<li class="nav_item"><a class="nav-link"
+						href="admin/manage_category">Categories</a></li>
+					<li class="nav-item"><a href="#"
+						class="btn btn-outline-danger">Deconnexion</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+</header>
+<body>
+
+
+	<div class="btn-group" role="group" aria-label="Basic example"></div>
+	<div class="container">
+		<h3>Tableau de bord</h3>
+	</div>
+
+
+	<div class="container col-sm-8">
+		<div class="table-responsive">
+			<table class="table table-hover">
+
+				<tr class="table-dark">
+					<th scope="row">Numéro de commande</th>
+					<th>Date</th>
+				</tr>
+				<tr th:each="order : ${orders}">
+					<td th:text="${order.id_order}">...</td>
+					<td th:text="${order.order_date}">...</td>
+				</tr>
+
+			</table>
+		</div>
+	</div>
+
+	<div class="container">
+		<table class="table table-hover">
+			<thead>
+				<tr class="table-info">
+					<th scope="row">Info</th>
+					<th scope="col">Prix total</th>
+					<th scope="col">Mail utilisateur</th>
+					<th scope="col">Taux de marge</th>
+				</tr>
+
+
+			</thead>
+			<tbody>
+				<!-- 			<tr th:each="order : ${orders}"> -->
+				<!-- 				<td th:text="${order.cart.total_price">...</td>				 -->
+				<!-- 				 <td th:text="${order.cart.user_email}">...</td> -->
+				<!-- 				<td th:text="${order.cart.user.margin_rate">...</td> -->
+				<!-- 				</tr> -->
+				<tr th:each="order :${orders}">
+					<td th:text>Plop</td>
+					<td th:text>Plop</td>
+					<td th:text>Plop</td>
+					<td th:text>Plop</td>
+			</tbody>
+		</table>
+	</div>
+
+</body>
+</html>
