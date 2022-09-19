@@ -46,7 +46,7 @@ public class CartController {
 	@GetMapping({"/cart"})
 	public String getSelection(Model model, User user, Authentication authentication )  throws Exception {
 
-		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:8889/acme?useSSL=false", "root", "root");
+		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/acme?useSSL=false", "root", "root");
 		Statement st = con.createStatement();
 		ResultSet res = st.executeQuery("SELECT SUM(total) FROM selection WHERE id_cart is null ");
 

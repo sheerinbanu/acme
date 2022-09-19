@@ -1,0 +1,93 @@
+<html lang="fr" xmlns:th="http://www.thymeleaf.org/">
+<head>
+<meta charset="UTF-8">
+<title>Acme Home</title>
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+</head>
+
+<header>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary d-flex justify-content-between">
+		<div class="">
+			<a class="navbar-brand" href="#"><img th:src="@{/images/acmelogoD.png}" width="100px" height="100px"
+					class="m-auto" /></a>
+		</div>
+		<div class="">
+			<a href="/login" class="btn btn-success pr-4">Login</a>
+		</div>
+	</nav>
+
+</header>
+
+<body>
+
+	<div class="container">
+		<div class="p-5">
+			<h1 class="text-center">Notre histoire</h1>
+
+			<p class="text-center">Lorem Ipsum is simply dummy text of the
+				printing and typesetting industry. Lorem Ipsum has been the
+				industry's standard dummy text ever since the 1500s, when an unknown
+				printer took a galley of type and scrambled it to make a type
+				specimen book. It has survived not only five centuries, but also the
+				leap into electronic typesetting, remaining essentially unchanged.
+				It was popularised in the 1960s with the release of Letraset sheets
+				containing Lorem Ipsum passages, and more recently with desktop
+				publishing software like Aldus PageMaker including versions of Lorem
+				Ipsum. It is a long established fact that a reader will be
+				distracted by the readable content of a page when looking at its
+				layout. The point of using Lorem Ipsum is that it has a more-or-less
+				normal distribution of letters, as opposed to using 'Content here,
+				content here', making it look like readable English. Many desktop
+				publishing packages and web page editors now use Lorem Ipsum as
+				their default model text, and a search for 'lorem ipsum' will
+				uncover many web sites still in their infancy.</p>
+		</div>
+		<div class="container d-flex flex-lg-nowrap flex-md-wrap flex-sm-wrap">
+			<div class="card m-3 border-0">
+				<img th:src="@{/images/finesse.png}" width="200px" height="200px"
+					class="m-auto" />
+				<div class="card-body">
+					<p class="card-text text-center">Le travail d'orfèvre réalisé par nos
+						artistes rend chacun de nos produits unique. Toutes nos créations
+						sont confectionnées et assemblées à la main. up the bulk of the
+						card's content.</p>
+				</div>
+			</div>
+			<div class="card m-3 border-0">
+				<img th:src="@{/images/qualite.png}" width="200px" height="200px"
+					class="m-auto" />
+				<div class="card-body">
+					<p class="card-text text-center">La qualité des produits est la raison d'être
+						de notre maison. Nous sélectionnons les meilleurs matières
+						premières en lien étroit avec des artisans priviligiés.</p>
+				</div>
+			</div>
+			<div class="card m-3 border-0">
+				<img th:src="@{/images/services.png}" width="200px" height="200px"
+					class="m-auto" />
+				<div class="card-body">
+					<p class="card-text text-center">Au delà d'une simple paire de basket, nous
+						offrons à nos clients une éxperience de vie. Chacun de nos
+						produits est accompagné de services permettant d'enrichir cette
+						experience.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<footer
+	class="d-flex justify-content-between align-items-center py-3 my-4 w-100 bg-black text-white border-top">
+	<p class="col-md-4 mb-0 text-muted">ACME Limited Company</p>
+	<a href="/"
+		class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+	</a>
+
+	<ul class="nav col-md-4 justify-content-end">
+		<li class="nav-item"><a href="https://github.com/sheerinbanu/acme" class="text-white w-60 h-60" target="_blank"><i class="bi bi-github"></i></a></li>
+		<li class="nav-item"><a href="https://trello.com/b/y2dGQzit/acme" class="text-white" target="_blank"><i class="bi bi-kanban"></i></a></li>
+	</ul>
+</footer>
+
+</html>
