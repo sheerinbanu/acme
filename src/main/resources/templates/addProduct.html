@@ -24,10 +24,10 @@
 						href="/admin/manage_category">Categorie</a></li>
 					<li class="nav-item"><a class="nav-link"
 						href="/admin/manage_product">Collection</a></li>
-					<li class="nav-item"><a class="nav-link" href="/admin/addAdmin">Profil-Admin</a>
-					</li>
-					<li class="nav-item"><a class="nav-link" href="/admin/manage_user">Profil-Client</a>
-					</li>
+					<li class="nav-item"><a class="nav-link"
+						href="/admin/addAdmin">Profil-Admin</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="/admin/manage_user">Profil-Client</a></li>
 					<li class="nav-item"><a class="nav-link active" href="/home">Interface-Client</a>
 					</li>
 				</ul>
@@ -48,79 +48,79 @@
 					<input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" />
 				</form>
-					<h2>
-						Accès Portail <span sec:authentication="authorities[0]"></span>
-						ACME Pro.
-					</h2>
+				<h2>
+					Accès Portail <span sec:authentication="authorities[0]"></span>
+					ACME Pro.
+				</h2>
 			</div>
 		</div>
 	</div>
 
 	<div class="container">
-	
-	<div class="row">
-      <div class="col">
-        <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
-          <ol class="breadcrumb mb-0">
-            <li class="breadcrumb-item"><a href="/admin/manage_product">Gestion Produits</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Ajout Produit</li>
-          </ol>
-        </nav>
-      </div>
-    </div>
+
+		<div class="row">
+			<div class="col">
+				<nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+					<ol class="breadcrumb mb-0">
+						<li class="breadcrumb-item"><a href="/admin/manage_product">Gestion
+								Produits</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Ajout
+							Produit</li>
+					</ol>
+				</nav>
+			</div>
+		</div>
+
+		<div class="p-5">
+			<h1 class="text-center">ACME CREATION Pro.</h1>
+			<p class="text-center">Ajout d'une Catégorie</p>
+		</div>
+
+		<div class="row justify-content-center">
+			<div class="col-6">
+
+				<form th:action="@{/admin/add_product}" th:object="${product}"
+					method="POST">
 
 
-		<div class="card-body mt-5">
-			<div class="d-flex justify-content-around py-5">
-				<div class="card border-primary mb-5 d-flex justify-content-around"
-					style="max-width: 40rem;">
-					<div class="card-header">Ajouter un produit</div>
+					<div class="mb-3">
+						<label for="name" class="form-label">Nom</label> <input
+							type="text" th:field="*{name}" class="form-control"
+							placeholder="All Star" />
+					</div>
 
-					<form th:action="@{/admin/add_product}" th:object="${product}"
-						method="POST">
+					<div class="mb-3">
+						<label for="unit_price" class="form-label">Prix Suggéré</label> <input
+							type="number" step="0.01" th:field="*{unit_price}"
+							class="form-control" placeholder="200">
+					</div>
 
-						<div class="form-group">
-							<label for="name">Nom</label> <input type="text"
-								th:field="*{name}" class="form-control" /> <input type="hidden"
-								th:field="*{id_product}" class="form-control" />
-						</div>
-
-						<div>
-							<label for="unit_price">Prix Unitaire</label> <input
-								type="number" step="0.01" th:field="*{unit_price}"
-								class="form-control" placeholder="prix">
-						</div>
-
+					<div class="mb-3">
 						<select th:field="*{category}" class="custom-select">
 							<option value="" selected>choisir</option>
 							<option th:each="category: ${categories}"
 								th:value="${category.id_category}" th:text="${category.name}">
 						</select>
+					</div>
+					<div class="mb-3">
+						<label for="url" class="form-label">Photo URL</label> <input
+							type="text" th:field="*{picture}" class="form-control" />
+					</div>
 
-						<div class="form-group">
-							<label for="name">URL</label> <input type="text"
-								th:field="*{picture}" class="form-control" />
-						</div>
+					<div class="mb-3">
+						<label for="description" class="form-label">Description</label>
+						<textarea th:field="*{description}"></textarea>
+					</div>
 
+					<input type="hidden" th:field="*{id_product}" class="form-control" />
 
-						<div>
-							<label for="description">Description</label>
-							<textarea th:field="*{description}"></textarea>
-						</div>
+					<button type="submit" class="btn btn-primary">Enregister</button>
 
-						<input type="submit" class="btn btn-primary" value="Enregistrer">
-						<input type="hidden" th:field="*{id_product}" />
-					</form>
-
-				</div>
-
-				<div>
-					<a th:href="@{/admin/manage_product}">Retour</a>
-				</div>
+				</form>
 
 			</div>
 		</div>
-	</div>
 
+	</div>
 </body>
 </html>

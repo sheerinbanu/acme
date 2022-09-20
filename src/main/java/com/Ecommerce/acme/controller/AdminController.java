@@ -16,6 +16,7 @@ import com.Ecommerce.acme.model.User;
 import com.Ecommerce.acme.service.AuthService;
 import com.Ecommerce.acme.service.CategoryService;
 import com.Ecommerce.acme.service.ProductService;
+import com.Ecommerce.acme.service.UserService;
 import com.Ecommerce.acme.validator.UserValidator;
 
 
@@ -33,6 +34,9 @@ public class AdminController {
 
 	@Autowired
 	private CategoryService cs;
+	
+	@Autowired
+	private UserService userService;
 
 
 
@@ -119,5 +123,28 @@ public class AdminController {
 		model.addAttribute("category", category1);
 		return "addCategory";
 	}
+	
+	@GetMapping({"/admin/manage_user"}) 
+	public String userProfile(Model model) {
+		model.addAttribute("users", userService.getAllUsers()); 
+		return "manageUser";
+	}
+
+
+	@GetMapping("/admin/update_user/{id}")         
+	public String updateUser(Model model, @ModelAttribute("user")User user, 
+			@PathVariable(name = "id")  int id_user){         
+		Optional<User> user1 = userService.getUser(id_user);          
+		model.addAttribute("user", user1);        
+		return "updateUser";     
+		}
+	
+	
+	@GetMapping("/admin/delete_user/{id}")
+	public String DeleteUser(@PathVariable(name = "id") int id) {
+		userService.removeUser(id);
+		return "redirect:/admin/manage_user";
+	}
+	
 
 }

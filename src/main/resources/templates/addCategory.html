@@ -26,8 +26,8 @@
 						href="/admin/manage_product">Collection</a></li>
 					<li class="nav-item"><a class="nav-link"
 						href="/admin/addAdmin">Profil-Admin</a></li>
-					<li class="nav-item"><a class="nav-link" href="/admin/manage_user">Profil-Client</a>
-					</li>
+					<li class="nav-item"><a class="nav-link"
+						href="/admin/manage_user">Profil-Client</a></li>
 					<li class="nav-item"><a class="nav-link active" href="/home">Interface-Client</a>
 					</li>
 				</ul>
@@ -71,31 +71,29 @@
 			</div>
 		</div>
 
-		<div class="card-body mt-5">
-			<div class="d-flex justify-content-around py-5">
+		<div class="p-5">
+			<h1 class="text-center">ACME CREATION Pro.</h1>
+			<p class="text-center">Ajout d'une Catégorie</p>
+		</div>
 
-				<div class="card border-primary mb-5 d-flex justify-content-around"
-					style="max-width: 40rem;">
+		<div class="row justify-content-center">
+			<div class="col-6">
 
-					<div class="card-header">Ajouter une catégorie</div>
+				<form th:action="@{/admin/add_category}" th:object="${category}"
+					method="POST">
 
-					<form th:action="@{/admin/add_category}" th:object="${category}"
-						method="POST">
 
-						<div class="form-group">
-							<label for="name">Nom</label> <input type="text" th:field="*{name}" class="form-control" /> 
-								<input type="hidden" th:field="*{id_category}" class="form-control" />
-						</div>
+					<div class="mb-3">
+						<label for="exampleInputPassword1" class="form-label">Catégorie</label>
 
-						<input type="submit" class="btn btn-primary" value="Enregistrer">
-						<input type="hidden" th:field="*{id_category}" />
-					</form>
+						<input type="text" th:field="*{name}" class="form-control"
+							placeholder="Outdoor" /> <input type="hidden"
+							th:field="*{id_category}" class="form-control" />
+					</div>
 
-				</div>
+					<button type="submit" class="btn btn-primary">Enregister</button>
 
-				<div>
-					<a th:href="@{/admin/manage_category}">Retour</a>
-				</div>
+				</form>
 
 			</div>
 		</div>

@@ -75,50 +75,5 @@ public class UserController {
 		model.addAttribute("person", userService.findByUsername(authentication.getName()));
 		return "profil";
 	}
-	
-	
-	@GetMapping({"/admin/manage_user"}) 
-	public String userProfile(Model model) {
-		model.addAttribute("users", userService.getAllUsers()); 
-		return "manageUser";
-	}
-
-
-	@GetMapping("/admin/update_user/{id}")         
-	public String updateUser(Model model, @ModelAttribute("user")User user, 
-			@PathVariable(name = "id")  int id_user){         
-		Optional<User> user1 = userService.getUser(id_user);          
-		model.addAttribute("user", user1);        
-		return "updateUser";     
-		}
-	
-	
-	@GetMapping("/admin/delete_user/{id}")
-	public String DeleteUser(@PathVariable(name = "id") int id) {
-		userService.removeUser(id);
-		return "redirect:/admin/manage_user";
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 }
