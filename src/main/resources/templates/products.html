@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+<meta charset="UTF-8">
+<title>Produits</title>
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">ACME Gestion Pro.</a>
+
+			<div class="collapse navbar-collapse" id="navbarColor01">
+
+				<ul class="navbar-nav me-auto">
+					<li class="nav-item"><a class="nav-link active" href="/home">Accueil</a>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="/products">Produits</a>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="/profil">Profil</a>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="/order_history">Historique</a>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="/cart">Panier</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<button class="btn btn-outline-danger my-2 my-sm-0">
+			<a onclick="document.forms['logoutForm'].submit()">Déconnexion</a>
+		</button>
+
+	</nav>
+
+	<div class="container">
+
+		<div class="row justify-content-center">
+
+			<div class="col-6 mt-3" sec:authorize="isAuthenticated()">
+
+				<form id="logoutForm" method="POST" th:action="@{/logout}">
+					<input type="hidden" name="${_csrf.parameterName}"
+						value="${_csrf.token}" />
+				</form>
+
+				<h2>
+					Accès Portail <span sec:authentication="authorities[0]"></span>
+					ACME Pro.
+				</h2>
+
+			</div>
+
+		</div>
+	</div>
+	<div class="container py-5">
+
+		<div class="row justify-content-around">
+
+			<div class="card mb-3" style="width: 18rem;" th:each="product: ${products}">
+
+				<h3 class="card-header" th:text="${product.name}"></h3>
+
+				<div class="card-body">
+					<div class="row justify-content-start">
+						<div class="col-4" th:text="${product.unit_price}"></div>
+						<div class="col-7">EUR</div>
+					</div>
+				</div>
+
+				<img th:src="${product.picture}" width="100%" height="100%" />
+
+				<div class="card-body">
+
+					<p class="card-text" th:text="${product.description}"></p>
+					<div th:text="${product.category.name}"></div>
+
+				</div>
+
+				<form method="POST" class="form-signin" th:object="${selectionForm}"
+					th:action="@{/products}">
+
+					<div class="card-body">
+
+						<div class="form-group pb-3">
+							<label for="name">Quantité</label> <select name="quantity">
+								<option th:each="quantity :${quantityList}"
+									th:text="${quantity}"></option>
+							</select>
+						</div>
+
+						<div class="form-group pb-3">
+							<label for="name">Pointure</label> <select name="size">
+								<option th:each="size :${sizeList}" th:text="${size}"></option>
+							</select>
+						</div>
+			
+						 <input type="hidden" name="product" th:value="${product.id_product}" >
+						 
+						<div class="row">
+							<button type="submit" class="btn btn-danger">Ajouter au
+								Panier</button>
+						</div>
+
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+</body>
+<footer class="bg-dark text-center text-white">
+	<div class="text-center p-3 navbar-dark bg-primary">
+		© 2022 Copyright: <a class="text-white" href="#">ACME.com</a>
+	</div>
+</footer>
+</html>

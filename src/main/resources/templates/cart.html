@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+<meta charset="utf-8">
+<title>Panier</title>
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+</head>
+
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">ACME Gestion Pro.</a>
+
+			<div class="collapse navbar-collapse" id="navbarColor01">
+
+				<ul class="navbar-nav me-auto">
+					<li class="nav-item"><a class="nav-link active" href="/home">Accueil</a>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="/products">Produits</a>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="/profil">Profil</a>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="/order_history">Historique</a>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="/cart">Panier</a>
+					</li>
+				</ul>
+
+			</div>
+		</div>
+
+		<button class="btn btn-outline-danger my-2 my-sm-0">
+			<a onclick="document.forms['logoutForm'].submit()">Déconnexion</a>
+		</button>
+	</nav>
+
+	<div class="container">
+
+		<div class="row justify-content-center">
+
+			<div class="col-6 mt-3" sec:authorize="isAuthenticated()">
+
+				<form id="logoutForm" method="POST" th:action="@{/logout}">
+					<input type="hidden" name="${_csrf.parameterName}"
+						value="${_csrf.token}" />
+				</form>
+
+				<h2>
+					Accès Portail <span sec:authentication="authorities[0]"></span>
+					ACME Pro.
+				</h2>
+
+			</div>
+
+		</div>
+	</div>
+
+	<section style="background-color: #eee;">
+
+		<div class="container py-5">
+
+			<div class="wrapper wrapper-content animated fadeInRight">
+				<div class="row">
+					<div class="col-md-9">
+						<div class="ibox">
+							<div class="ibox-title">
+								<h5>Selection dans votre Panier</h5>
+							</div>
+
+							<div class="ibox-content" th:each="selection: ${selections}">
+								<div class="table-responsive">
+									<table class="table shoping-cart-table">
+										<tbody>
+											<tr>
+												<td width="90">
+													<div class="cart-product-imitation">
+														<img th:src="${selection.product.picture}" width="75%"
+															height="110%">
+													</div>
+
+												</td>
+												<td class="desc">
+													<h3>
+														<a href="#" class="text-navy"
+															th:text="${selection.product.name}"></a>
+													</h3>
+													<p class="small" th:text="${selection.product.description}"></p>
+													<dl class="small m-b-none">
+														<dt>Pointure</dt>
+														<dd th:text="${selection.size}"></dd>
+													</dl>
+
+													<div class="m-t-sm">
+
+														<a type="submit"
+															th:href="@{'/cart/' + ${selection.id_selection}}"
+															class="btn btn-primary pull-right"> Supprimer la
+															Selection</a>
+													</div>
+
+												</td>
+
+												<td>
+													<h4 th:text="${selection.margin_price}"></h4> <s
+													class="small text-muted"
+													th:text="${selection.product.unit_price}"></s>
+												</td>
+												<td><input th:value="${selection.quantity}"
+													class="form-control" disabled></td>
+												<td>
+													<h4 th:text="${selection.total}"></h4>
+													<h5>€</h5>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+
+							<form method="POST" class="form-signin" th:object="${cartForm}"
+								th:action="@{/cart}">
+
+								<input type="hidden" name="user" th:value="${person.id_user}">
+
+								<div class="ibox-content">
+									<button type="submit" class="btn btn-primary pull-right">
+										<i class="fa fa fa-shopping-cart"></i> Commander
+									</button>
+									<a href="/products" class="btn btn-white"><i
+										class="fa fa-arrow-left"></i> Continuer Achat</a>
+								</div>
+							</form>
+
+						</div>
+					</div>
+
+					<div class="col-md-3">
+						<div class="ibox">
+							<div class="ibox-title">
+								<h5>Résumé du Panier</h5>
+							</div>
+							<div class="ibox-content">
+								<span> Total en Euro € </span>
+								<h2 class="font-bold" th:text="${finalPrice}"></h2>
+								<hr>
+								<span class="pull-right">(<strong
+									th:text="${person.margin_rate}"></strong>) % Remise Commercial
+								</span>
+								<hr>
+								<span class="text-muted small"> *Tous les prix appliqués
+									sont HT. </span>
+								<hr>
+								<div class="m-t-sm">
+									<div class="btn-group">
+										<a href="#" class="btn btn-primary btn-sm"><i
+											class="fa fa-shopping-cart"></i> Commander</a> <a href="#"
+											class="btn btn-white btn-sm"> Annuler</a>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="ibox">
+							<div class="ibox-title">
+								<h5>Support</h5>
+							</div>
+							<div class="ibox-content text-center">
+								<h3>
+									<i class="fa fa-phone"></i> +44 100 783 001
+								</h3>
+								<span class="small"> Veuillez nous contacter si vous avez
+									des questions. Notre plateforme est ouverte 24h/24h. </span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+<footer class="bg-dark text-center text-white">
+	<div class="text-center p-3 navbar-dark bg-primary">
+		© 2022 Copyright: <a class="text-white" href="#">ACME.com</a>
+	</div>
+</footer>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>Creéation Client</title>
+    <link th:href ="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+</head>
+
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  		<div class="container-fluid">
+   			 <a class="navbar-brand" href="#">ACME Gestion Pro Client.</a>
+  		</div>
+ 	</nav>
+	
+    <div class="container pb-5">
+    
+     <div class="p-5">
+        <h1 class="text-center">ACME Inscription Pro.</h1>
+  		<p class="text-center">Ce portail est destiné aux commerciaux de la marque, afin qu'ils puissent passer des commandes.</p>
+     </div> 
+
+	<div class="row justify-content-center">
+  	 	<div class="col-6">
+  	 
+        <form method="POST" class="form-signin" th:object="${userForm}" th:action="@{/registration}">
+            
+            <h2 class="form-signin-heading">Création de Compte Client</h2>
+            
+             <div class="form-group mb-3">
+                <input type="text" th:field="*{first_name}" class="form-control" placeholder="First Name" autofocus="true">       
+            </div>
+            
+            <div class="form-group mb-3">
+                <input type="text" th:field="*{last_name}" class="form-control" placeholder="Last Name" autofocus="true">       
+            </div>
+            
+            <div class="form-group mb-3">
+                <input type="text" th:field="*{email}" class="form-control" placeholder="Email" autofocus="true">       
+            </div>
+            
+            <div class="form-group mb-3">
+                <input type="number" th:field="*{margin_rate}" class="form-control" autofocus="true">       
+            </div>
+     
+             <div class="form-group mb-3">
+    			<select class="form-control" th:field="*{type}" >
+      				<option th:value="'commercial'" th:text="Commercial"></option>
+  			  	</select>
+  			</div>
+                
+            <div class="form-group mb-3">
+                <input type="text" th:field="*{username}" class="form-control" placeholder="Username" autofocus="true">
+                <span class="has-error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <input type="password" th:field="*{password}" class="form-control" placeholder="Password">
+                <span class="has-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <input type="password" th:field="*{passwordConfirm}" class="form-control"
+                    placeholder="Confirm your password">
+                <span class="has-error" th:if="${#fields.hasErrors('passwordConfirm')}"
+                    th:errors="*{passwordConfirm}"></span>
+            </div>
+
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+        </form>
+
+    		</div>
+   	 	</div>
+    </div>
+
+</body>
+<footer class="bg-dark text-center text-white">
+  	<div class="text-center p-3 navbar-dark bg-primary"> © 2022 Copyright: 
+  		<a class="text-white" href="#">ACME.com</a>
+ 	</div>
+</footer>
+</html>
