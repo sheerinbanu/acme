@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+<meta charset="utf-8">
+<title>Gestion Produits</title>
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+</head>
+
+<body>
+
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">ACME Gestion Pro.</a>
+
+			<div class="collapse navbar-collapse" id="navbarColor01">
+
+				<ul class="navbar-nav me-auto">
+					<li class="nav-item"><a class="nav-link" href="#">Commande</a>
+					</li>
+					<li class="nav-item"><a class="nav-link"
+						href="/admin/manage_category">Categorie</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="/admin/manage_product">Collection</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="/admin/addAdmin">Profil-Admin</a></li>
+					<li class="nav-item"><a class="nav-link" href="/admin/manage_user">Profil-Client</a>
+					</li>
+					<li class="nav-item"><a class="nav-link active" href="/home">Interface-Client</a>
+					</li>
+				</ul>
+
+			</div>
+		</div>
+
+		<button class="btn btn-outline-danger my-2 my-sm-0">
+			<a onclick="document.forms['logoutForm'].submit()">Déconnexion</a>
+		</button>
+
+	</nav>
+
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-6 mt-3" sec:authorize="isAuthenticated()">
+				<form id="logoutForm" method="POST" th:action="@{/logout}">
+					<input type="hidden" name="${_csrf.parameterName}"
+						value="${_csrf.token}" />
+				</form>
+				<h2>
+					Accès Portail <span sec:authentication="authorities[0]"></span>
+					ACME Pro.
+				</h2>
+			</div>
+		</div>
+	</div>
+
+	<div class="d-flex justify-content-around mt-5 mb-5 ">
+		<div class="table-responsive">
+			<form class="d-flex">
+				<input class="form-control me-sm-2" type="text"
+					placeholder="rechercher des produits">
+				<button class="btn btn-secondary my-2 my-sm-0" type="submit">rechercher</button>
+			</form>
+		</div>
+		<div>
+			<a href="/admin/add_product" class="btn btn-outline-success">+
+				Ajouter un produit</a>
+		</div>
+	</div>
+
+
+	<div class="container">
+		<div class="table-responsive">
+			<table class="table table-hover">
+				<thead class="table-dark">
+					<tr>
+						<th>Id</th>
+						<th scope="col">Produit</th>
+						<th scope="col">Image</th>
+						<th scope="col">Editer</th>
+						<th scope="col">Supprimer</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr class="table-active" th:each="product: ${products}">
+						<th th:text="${product.id_product}">
+						<td th:text="${product.name}">
+						<td><img th:src="@{${product.picture}}" width="10%"
+							height="10%" /></td>
+
+						<td>
+							<a th:href="@{'/admin/update_product/' + ${product.id_product}}"
+							class="btn btn-success" role="button">&#9999</a>
+						</td>
+
+
+						<td><a
+							th:href="@{'/admin/delete_product/' + ${product.id_product}}"
+							class="btn btn-warning" role="button">Supprimer</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

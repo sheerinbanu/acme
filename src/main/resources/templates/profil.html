@@ -1,222 +1,243 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-    <meta charset="utf-8">
-    <title>Profil</title>
-    <link th:href ="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+<meta charset="utf-8">
+<title>Profil</title>
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
 </head>
 <body>
 
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  		<div class="container-fluid">
-   			 <a class="navbar-brand" href="#">ACME Gestion Pro.</a>
-   			 	<div class="collapse navbar-collapse" id="navbarColor01">
-     				 <ul class="navbar-nav me-auto">
-       					 <li class="nav-item">
-         					<a class="nav-link active" href="/home">Accueil</a>
-       	 				</li>
-        				<li class="nav-item">
-          					<a class="nav-link" href="/products">Produits</a>
-       					</li>
-       					<li class="nav-item">
-          					<a class="nav-link" href="/profil">Profil</a>
-        				</li>
-        				<li class="nav-item">
-          					<a class="nav-link" href="/order_history">Historique</a>
-        				</li>
-        				 <li class="nav-item">
-         					<a class="nav-link" href="/cart">Panier</a>
-       	 				</li>
-      				</ul>
-    			</div>
-  			</div>
-  			
-  			<button class="btn btn-outline-danger my-2 my-sm-0">
-     			 <a onclick="document.forms['logoutForm'].submit()">Déconnexion</a> 
-     		</button>
- 	</nav>
- 	
- 	<div class="container">
-    
-     <div class="row justify-content-center">
-     
-        	<div class="col-6 mt-3" sec:authorize="isAuthenticated()">
-        
-            	<form id="logoutForm" method="POST" th:action="@{/logout}">
-                	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-           		 </form>
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">ACME Gestion Pro.</a>
+			<div class="collapse navbar-collapse" id="navbarColor01">
+				<ul class="navbar-nav me-auto">
+					<li class="nav-item"><a class="nav-link active" href="/home">Accueil</a>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="/products">Produits</a>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="/profil">Profil</a>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="/order_history">Historique</a>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="/cart">Panier</a>
+					</li>
+				</ul>
+			</div>
+		</div>
 
-            <h2>Accès Portail <span sec:authentication="authorities[0]"></span> ACME Pro. </h2>
-      		
-      		</div>
-    
-    	 </div>    
-     </div>
-     
-  <section style="background-color: #eee;">
-  
-  <div class="container py-5">
-    <div class="row">
-      <div class="col">
-        <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
-          <ol class="breadcrumb mb-0">
-            <li class="breadcrumb-item"><a href="/">Accueil</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Profil Utilisateur</li>
-          </ol>
-        </nav>
-      </div>
-    </div>
+		<button class="btn btn-outline-danger my-2 my-sm-0">
+			<a onclick="document.forms['logoutForm'].submit()">Déconnexion</a>
+		</button>
+	</nav>
 
-    <div class="row">
-      <div class="col-lg-4">
-      
-        <div class="card mb-4">
-          <div class="card-body text-center">
-            <img src="https://t4.ftcdn.net/jpg/03/76/14/95/240_F_376149573_4IjbehMnJ1norK4yfWiFEmFrI3TmQf1K.jpg" alt="avatar"
-            
-              class="rounded-circle img-fluid" style="width: 150px;">
-            <h5 class="my-3" th:text="${person.first_name}"></h5>
-            <p class="text-muted mb-1">Commercial chez ACME</p>
-            <p class="text-muted mb-4">Zone d'exploitation E.U</p>
-          </div>
-        </div>
-        
-        <div class="card mb-4 mb-lg-0">
-          <div class="card-body">
-           
-           <div class="row">
-      
-              <div class="col-sm-6">
-                <p class="mb-0">Username Professionel</p>
-              </div>
-              
-              <div class="col-sm-6">
-                <p class="text-muted mb-0" th:text="${person.username}"></p>
-              </div>
-              
-            </div>
+	<div class="container">
 
-          </div>
-        </div>
-        
-      </div>
-      <div class="col-lg-8">
-        <div class="card mb-4">
-          <div class="card-body">
-          <div class="row">
-              <div class="col-sm-3">
-                <p class="mb-0">Nom</p>
-              </div>
-              <div class="col-sm-9" >
-                <p class="text-muted mb-0" th:text="${person.last_name}"></p>
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-sm-3">
-                <p class="mb-0">Prénom</p>
-              </div>
-              <div class="col-sm-9">
-                <p class="text-muted mb-0" th:text="${person.first_name}"></p>
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-sm-3">
-                <p class="mb-0">Email</p>
-              </div>
-              <div class="col-sm-9">
-                <p class="text-muted mb-0" th:text="${person.email}" ></p>
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-sm-3">
-                <p class="mb-0">Taux de Marge</p>
-              </div>
-              <div class="col-sm-9">
-                <p class="text-muted mb-0" th:text="${person.margin_rate}"></p>
-              </div>
-            </div>
-            <hr>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="card mb-4 mb-md-0">
-              <div class="card-body">
-                <p class="mb-4"><span class="text-primary font-italic me-1">DATA</span> Bonus Personnel (Feature)
-                </p>
-                <p class="mb-1" style="font-size: .77rem;">Nombre de commande</p>
-                <div class="progress rounded" style="height: 5px;">
-                  <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="80"
-                    aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <p class="mt-4 mb-1" style="font-size: .77rem;">Chiffre d'affaire</p>
-                <div class="progress rounded" style="height: 5px;">
-                  <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="72"
-                    aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <p class="mt-4 mb-1" style="font-size: .77rem;">Quantitté total commandé</p>
-                <div class="progress rounded" style="height: 5px;">
-                  <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="89"
-                    aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <p class="mt-4 mb-1" style="font-size: .77rem;">Réference la plus commandé</p>
-                <div class="progress rounded" style="height: 5px;">
-                  <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="55"
-                    aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <p class="mt-4 mb-1" style="font-size: .77rem;">Dernière commande en date</p>
-                <div class="progress rounded mb-2" style="height: 5px;">
-                  <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="66"
-                    aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="card mb-4 mb-md-0">
-              <div class="card-body">
-                <p class="mb-4"><span class="text-primary font-italic me-1"></span> ACME GROUPE DATA 2021.
-                </p>
-                <p class="mb-1" style="font-size: .77rem;">Marge de rentabilité client </p>
-                <div class="progress rounded" style="height: 5px;">
-                  <div class="progress-bar" role="progressbar" style="width: 40%" aria-valuenow="80"
-                    aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <p class="mt-4 mb-1" style="font-size: .77rem;">Taux de conversion des prospects</p>
-                <div class="progress rounded" style="height: 5px;">
-                  <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="72"
-                    aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <p class="mt-4 mb-1" style="font-size: .77rem;">Taux de satisfaction</p>
-                <div class="progress rounded" style="height: 5px;">
-                  <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89"
-                    aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <p class="mt-4 mb-1" style="font-size: .77rem;">Pourcentage de vente en France</p>
-                <div class="progress rounded" style="height: 5px;">
-                  <div class="progress-bar" role="progressbar" style="width: 30%" aria-valuenow="55"s
-                    aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <p class="mt-4 mb-1" style="font-size: .77rem;">Pourcentage de vente zone E.U</p>
-                <div class="progress rounded mb-2" style="height: 5px;">
-                  <div class="progress-bar" role="progressbar" style="width: 70%" aria-valuenow="66"
-                    aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+		<div class="row justify-content-center">
+
+			<div class="col-6 mt-3" sec:authorize="isAuthenticated()">
+
+				<form id="logoutForm" method="POST" th:action="@{/logout}">
+					<input type="hidden" name="${_csrf.parameterName}"
+						value="${_csrf.token}" />
+				</form>
+
+				<h2>
+					Accès Portail <span sec:authentication="authorities[0]"></span>
+					ACME Pro.
+				</h2>
+
+			</div>
+
+		</div>
+	</div>
+
+	<section style="background-color: #eee;">
+
+		<div class="container py-5">
+			<div class="row">
+				<div class="col">
+					<nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+						<ol class="breadcrumb mb-0">
+							<li class="breadcrumb-item"><a href="/">Accueil</a></li>
+							<li class="breadcrumb-item active" aria-current="page">Profil
+								Utilisateur</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-lg-4">
+
+					<div class="card mb-4">
+						<div class="card-body text-center">
+							<img
+								src="https://t4.ftcdn.net/jpg/03/76/14/95/240_F_376149573_4IjbehMnJ1norK4yfWiFEmFrI3TmQf1K.jpg"
+								alt="avatar" class="rounded-circle img-fluid"
+								style="width: 150px;">
+							<h5 class="my-3" th:text="${person.first_name}"></h5>
+							<p class="text-muted mb-1">Commercial chez ACME</p>
+							<p class="text-muted mb-4">Zone d'exploitation E.U</p>
+						</div>
+					</div>
+
+					<div class="card mb-4 mb-lg-0">
+						<div class="card-body">
+
+							<div class="row">
+
+								<div class="col-sm-6">
+									<p class="mb-0">Username Professionel</p>
+								</div>
+
+								<div class="col-sm-6">
+									<p class="text-muted mb-0" th:text="${person.username}"></p>
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+				<div class="col-lg-8">
+					<div class="card mb-4">
+						<div class="card-body">
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0">Nom</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0" th:text="${person.last_name}"></p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0">Prénom</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0" th:text="${person.first_name}"></p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0">Email</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0" th:text="${person.email}"></p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0">Taux de Marge</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0" th:text="${person.margin_rate}"></p>
+								</div>
+							</div>
+							<hr>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="card mb-4 mb-md-0">
+								<div class="card-body">
+									<p class="mb-4">
+										<span class="text-primary font-italic me-1">DATA</span> Bonus
+										Personnel (Feature)
+									</p>
+									<p class="mb-1" style="font-size: .77rem;">Nombre de
+										commande</p>
+									<div class="progress rounded" style="height: 5px;">
+										<div class="progress-bar" role="progressbar" style="width: 0%"
+											aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+									</div>
+									<p class="mt-4 mb-1" style="font-size: .77rem;">Chiffre
+										d'affaire</p>
+									<div class="progress rounded" style="height: 5px;">
+										<div class="progress-bar" role="progressbar" style="width: 0%"
+											aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
+									</div>
+									<p class="mt-4 mb-1" style="font-size: .77rem;">Quantitté
+										total commandé</p>
+									<div class="progress rounded" style="height: 5px;">
+										<div class="progress-bar" role="progressbar" style="width: 0%"
+											aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
+									</div>
+									<p class="mt-4 mb-1" style="font-size: .77rem;">Réference
+										la plus commandé</p>
+									<div class="progress rounded" style="height: 5px;">
+										<div class="progress-bar" role="progressbar" style="width: 0%"
+											aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+									</div>
+									<p class="mt-4 mb-1" style="font-size: .77rem;">Dernière
+										commande en date</p>
+									<div class="progress rounded mb-2" style="height: 5px;">
+										<div class="progress-bar" role="progressbar" style="width: 0%"
+											aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="card mb-4 mb-md-0">
+								<div class="card-body">
+									<p class="mb-4">
+										<span class="text-primary font-italic me-1"></span> ACME
+										GROUPE DATA 2021.
+									</p>
+									<p class="mb-1" style="font-size: .77rem;">Marge de
+										rentabilité client</p>
+									<div class="progress rounded" style="height: 5px;">
+										<div class="progress-bar" role="progressbar"
+											style="width: 40%" aria-valuenow="80" aria-valuemin="0"
+											aria-valuemax="100"></div>
+									</div>
+									<p class="mt-4 mb-1" style="font-size: .77rem;">Taux de
+										conversion des prospects</p>
+									<div class="progress rounded" style="height: 5px;">
+										<div class="progress-bar" role="progressbar"
+											style="width: 50%" aria-valuenow="72" aria-valuemin="0"
+											aria-valuemax="100"></div>
+									</div>
+									<p class="mt-4 mb-1" style="font-size: .77rem;">Taux de
+										satisfaction</p>
+									<div class="progress rounded" style="height: 5px;">
+										<div class="progress-bar" role="progressbar"
+											style="width: 89%" aria-valuenow="89" aria-valuemin="0"
+											aria-valuemax="100"></div>
+									</div>
+									<p class="mt-4 mb-1" style="font-size: .77rem;">Pourcentage
+										de vente en France</p>
+									<div class="progress rounded" style="height: 5px;">
+										<div class="progress-bar" role="progressbar"
+											style="width: 30%" aria-valuenow="55" s aria-valuemin="0"
+											aria-valuemax="100"></div>
+									</div>
+									<p class="mt-4 mb-1" style="font-size: .77rem;">Pourcentage
+										de vente zone E.U</p>
+									<div class="progress rounded mb-2" style="height: 5px;">
+										<div class="progress-bar" role="progressbar"
+											style="width: 70%" aria-valuenow="66" aria-valuemin="0"
+											aria-valuemax="100"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 </body>
-	<footer class="bg-dark text-center text-white">
-  		<div class="text-center p-3 navbar-dark bg-primary"> © 2022 Copyright: 
-  			<a class="text-white" href="#">ACME.com</a>
- 		</div>
-	</footer>
+<footer class="bg-dark text-center text-white">
+	<div class="text-center p-3 navbar-dark bg-primary">
+		© 2022 Copyright: <a class="text-white" href="#">ACME.com</a>
+	</div>
+</footer>
 </html>

@@ -28,9 +28,6 @@ public class ProductController {
 	private UserService us;
 
 	@Autowired
-	private CartService cs;
-
-	@Autowired
 	private ProductService ps;
 
 	static List<Integer> quantityList = null;

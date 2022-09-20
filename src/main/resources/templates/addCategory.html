@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+<meta charset="utf-8">
+<title>Ajout Catégorie</title>
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+</head>
+
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">ACME Gestion Pro.</a>
+
+			<div class="collapse navbar-collapse" id="navbarColor01">
+
+				<ul class="navbar-nav me-auto">
+					<li class="nav-item"><a class="nav-link" href="#">Commande</a>
+					</li>
+					<li class="nav-item"><a class="nav-link"
+						href="/admin/manage_category">Categorie</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="/admin/manage_product">Collection</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="/admin/addAdmin">Profil-Admin</a></li>
+					<li class="nav-item"><a class="nav-link" href="/admin/manage_user">Profil-Client</a>
+					</li>
+					<li class="nav-item"><a class="nav-link active" href="/home">Interface-Client</a>
+					</li>
+				</ul>
+
+			</div>
+		</div>
+
+		<button class="btn btn-outline-danger my-2 my-sm-0">
+			<a onclick="document.forms['logoutForm'].submit()">Déconnexion</a>
+		</button>
+
+	</nav>
+
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-6 mt-3" sec:authorize="isAuthenticated()">
+				<form id="logoutForm" method="POST" th:action="@{/logout}">
+					<input type="hidden" name="${_csrf.parameterName}"
+						value="${_csrf.token}" />
+				</form>
+				<h2>
+					Accès Portail <span sec:authentication="authorities[0]"></span>
+					ACME Pro.
+				</h2>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+
+		<div class="row">
+			<div class="col">
+				<nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+					<ol class="breadcrumb mb-0">
+						<li class="breadcrumb-item"><a href="/admin/manage_category">Gestion
+								Categories</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Ajout
+							Categorie</li>
+					</ol>
+				</nav>
+			</div>
+		</div>
+
+		<div class="card-body mt-5">
+			<div class="d-flex justify-content-around py-5">
+
+				<div class="card border-primary mb-5 d-flex justify-content-around"
+					style="max-width: 40rem;">
+
+					<div class="card-header">Ajouter une catégorie</div>
+
+					<form th:action="@{/admin/add_category}" th:object="${category}"
+						method="POST">
+
+						<div class="form-group">
+							<label for="name">Nom</label> <input type="text"
+								th:field="*{name}" class="form-control" /> <input type="hidden"
+								th:field="*{id_category}" class="form-control" />
+						</div>
+
+						<input type="submit" class="btn btn-primary" value="Enregistrer">
+						<input type="hidden" th:field="*{id_category}" />
+					</form>
+
+				</div>
+
+				<div>
+					<a th:href="@{/admin/manage_category}">Retour</a>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+
+</body>
+</html>
