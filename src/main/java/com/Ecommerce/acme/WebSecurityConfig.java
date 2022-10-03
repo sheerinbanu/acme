@@ -30,7 +30,7 @@ public class WebSecurityConfig{
     SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .antMatchers("/", /registration","/css/**", "/js/**", "/images/**").permitAll()
+                .antMatchers("/", "/registration","/css/**", "/js/**", "/images/**").permitAll()
                 .antMatchers("/admin/**").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()
