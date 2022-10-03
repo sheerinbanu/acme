@@ -49,7 +49,6 @@ public class UserController {
 
 		authService.createNewUser(userForm);
 
-
 		return "redirect:/login";
 	}
 

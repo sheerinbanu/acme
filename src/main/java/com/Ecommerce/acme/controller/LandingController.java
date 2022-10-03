@@ -11,6 +11,5 @@ public class LandingController {
 	public String landingPage(Model model) {
 		return "landingPage";
 	}
-	
 
 }

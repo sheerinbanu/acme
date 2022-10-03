@@ -80,14 +80,14 @@ public class AdminController {
     }
 	
 	@GetMapping("/admin/delete_product/{id}")
-		public String DeleteProduct(@PathVariable(name = "id") int id) {
+	public String DeleteProduct(@PathVariable(name = "id") int id) {
 			ps.deleteProduct(id);
 			return "redirect:/admin/manage_product";
 	}
 	
 			
 	@GetMapping("/admin/update_product/{id}")
-		public String UpdateProduct(Model model, @ModelAttribute("product")Product product, @PathVariable(name = "id")  int productId, BindingResult bindingResult){
+	public String UpdateProduct(Model model, @ModelAttribute("product")Product product, @PathVariable(name = "id")  int productId, BindingResult bindingResult){
 			Optional<Product> product1 = ps.getProduct(productId);
 			model.addAttribute("product", product1);
 			model.addAttribute("categories", cs.getAllCategory());
@@ -125,26 +125,28 @@ public class AdminController {
 	}
 	
 	@GetMapping({"/admin/manage_user"}) 
-	public String userProfile(Model model) {
+	public String getAllUsersProfile(Model model) {
 		model.addAttribute("users", userService.getAllUsers()); 
 		return "manageUser";
 	}
 
-
 	@GetMapping("/admin/update_user/{id}")         
-	public String updateUser(Model model, @ModelAttribute("user")User user, 
-			@PathVariable(name = "id")  int id_user){         
-		Optional<User> user1 = userService.getUser(id_user);          
+	public String getUser(Model model, @ModelAttribute("user")User user, @PathVariable(name = "id")  int id_user, BindingResult bindingResult){         
+		Optional<User> user1 = userService.getUser(id_user);
 		model.addAttribute("user", user1);        
 		return "updateUser";     
 		}
 	
+	@PostMapping("/admin/update_user/{id}")
+	public String updateUser(@ModelAttribute User user) {
+		userService.insertUser(user);
+		return "redirect:/admin/manage_user";
+	}
 	
 	@GetMapping("/admin/delete_user/{id}")
 	public String DeleteUser(@PathVariable(name = "id") int id) {
 		userService.removeUser(id);
 		return "redirect:/admin/manage_user";
-	}
-	
+	}	
 
 }

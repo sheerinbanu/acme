@@ -19,8 +19,7 @@ public class SelectionService {
 	}
 
 	public Iterable<Selection> getAllSelection() {
-		
-			return ss.findAll();
+		return ss.findAll();
 		
 	}
 

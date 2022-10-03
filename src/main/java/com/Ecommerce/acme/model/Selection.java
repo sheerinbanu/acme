@@ -26,7 +26,7 @@ public class Selection {
 	private int id_user;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_product", referencedColumnName= "id_product", insertable = true, updatable = false)
+	@JoinColumn(name = "id_product", referencedColumnName= "id_product", insertable = true, updatable = true)
 	private Product product;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

@@ -2,16 +2,13 @@ package com.Ecommerce.acme.service;
 
 import java.util.ArrayList;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-
 import com.Ecommerce.acme.model.Order;
 import com.Ecommerce.acme.model.Selection;
 import com.Ecommerce.acme.repository.OrderRepository;
-
 
 @Service
 public class OrderService {
@@ -21,7 +18,6 @@ public class OrderService {
 	
 	@Autowired
 	private SelectionService ss;
-	
 	
 	@Autowired
 	private UserService us;
@@ -46,6 +42,7 @@ public class OrderService {
 		
 		int currentUserId = us.findByUsername(authentication.getName()).getId_user();
 		
+		
 		ArrayList<Order> orderList = new ArrayList<Order>();
 		ArrayList<Selection> detailsList = new ArrayList<Selection>();
 
@@ -57,7 +54,7 @@ public class OrderService {
 
 				for(Selection s : ss.getAllSelection()) {
 
-					if( (s.getCart().getId_cart() == o.getCart().getId_cart() ) ) {
+					if( (s.getCart().getId_cart() == o.getCart().getId_cart()) ) {
 
 						detailsList.add(s);
 					}	

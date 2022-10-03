@@ -7,13 +7,18 @@
 <meta charset="utf-8">
 <title>Ajout Produit</title>
 <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 </head>
 
-<body>
+<header>
 
-	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="#">ACME Gestion Pro.</a>
+			<a class="navbar-brand" href="/admin/manage_category">ACME Gestion Pro.</a>
+			
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+     			 <span class="navbar-toggler-icon"></span>
+   		</button>
 
 			<div class="collapse navbar-collapse" id="navbarColor01">
 
@@ -25,9 +30,9 @@
 					<li class="nav-item"><a class="nav-link"
 						href="/admin/manage_product">Collection</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="/admin/addAdmin">Profil-Admin</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="/admin/manage_user">Profil-Client</a></li>
+						href="/admin/addAdmin">Création-Admin</a></li>
+					<li class="nav-item"><a class="nav-link" href="/admin/manage_user">Profil-Client</a>
+					</li>
 					<li class="nav-item"><a class="nav-link active" href="/home">Interface-Client</a>
 					</li>
 				</ul>
@@ -40,6 +45,10 @@
 		</button>
 
 	</nav>
+
+</header>
+
+<body>
 
 	<div class="container">
 		<div class="row justify-content-center">
@@ -73,10 +82,10 @@
 
 		<div class="p-5">
 			<h1 class="text-center">ACME CREATION Pro.</h1>
-			<p class="text-center">Ajout d'une Catégorie</p>
+			<p class="text-center">Ajout d'un Produit</p>
 		</div>
 
-		<div class="row justify-content-center">
+		<div class="row justify-content-center pb-5">
 			<div class="col-6">
 
 				<form th:action="@{/admin/add_product}" th:object="${product}"
@@ -84,7 +93,7 @@
 
 
 					<div class="mb-3">
-						<label for="name" class="form-label">Nom</label> <input
+						<label for="name" class="form-label">Nom du Produit</label> <input
 							type="text" th:field="*{name}" class="form-control"
 							placeholder="All Star" />
 					</div>
@@ -97,7 +106,7 @@
 
 					<div class="mb-3">
 						<select th:field="*{category}" class="custom-select">
-							<option value="" selected>choisir</option>
+							<option value="" selected>Catégorie</option>
 							<option th:each="category: ${categories}"
 								th:value="${category.id_category}" th:text="${category.name}">
 						</select>
@@ -123,4 +132,23 @@
 
 	</div>
 </body>
+
+<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+		crossorigin="anonymous"></script>
+
+
+<footer class="bg-dark text-center text-white">
+	<div class="text-center p-3 navbar-dark bg-primary">
+		© 2022 Copyright: <a class="text-white" href="#">ACME.com</a>
+		<a href="https://github.com/sheerinbanu/acme" class="text-white" target="_blank">
+			<i class="bi bi-github"></i>
+		</a>
+		<a href="https://trello.com/b/y2dGQzit/acme" class="text-white" target="_blank">
+			<i class="bi bi-kanban"></i>
+		</a>
+	</div>
+</footer>
+
 </html>
