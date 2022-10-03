@@ -13,19 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.Ecommerce.acme.model.Product;
 import com.Ecommerce.acme.model.Selection;
 import com.Ecommerce.acme.model.User;
-import com.Ecommerce.acme.service.CartService;
 import com.Ecommerce.acme.service.ProductService;
-import com.Ecommerce.acme.service.SelectionService;
-import com.Ecommerce.acme.service.UserService;
+
 
 @Controller
 public class ProductController {
-
-	@Autowired
-	private SelectionService ss;
-
-	@Autowired
-	private UserService us;
 
 	@Autowired
 	private ProductService ps;
@@ -65,24 +57,8 @@ public class ProductController {
 	}
 
 	@PostMapping("/products")
-	public String submitSelectionForm(@ModelAttribute("selectionForm") Selection selection,User user, Product product, Authentication authentication, Model model, BindingResult bindingResult){
-
-		int currentUserMarge = us.findByUsername(authentication.getName()).getMargin_rate();
-		int currentUserId = us.findByUsername(authentication.getName()).getId_user();
-
-		Double marge = (currentUserMarge / 100.0);
-		reduction = (product.getUnit_price() * marge);
-		marginPrice = (product.getUnit_price() - reduction); 
-		Double totalSelection = (marginPrice * selection.getQuantity());
-
-		selection.setMargin_price(marginPrice);
-		selection.setTotal(totalSelection);
-		selection.setId_user(currentUserId);
-
-		ss.insertSelection(selection);
-
-		return "redirect:/products";
+	public String addSelectToCart(@ModelAttribute("selectionForm") Selection selection,User user, Product product, Authentication authentication, Model model, BindingResult bindingResult){
+		return ps.submitSelectionForm(selection, user, product, authentication, model, bindingResult);
 	}
-
 
 }

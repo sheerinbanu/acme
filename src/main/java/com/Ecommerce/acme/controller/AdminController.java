@@ -3,6 +3,7 @@ package com.Ecommerce.acme.controller;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,17 +12,23 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.Ecommerce.acme.model.Category;
+import com.Ecommerce.acme.model.Order;
 import com.Ecommerce.acme.model.Product;
 import com.Ecommerce.acme.model.User;
 import com.Ecommerce.acme.service.AuthService;
 import com.Ecommerce.acme.service.CategoryService;
+import com.Ecommerce.acme.service.OrderService;
 import com.Ecommerce.acme.service.ProductService;
+import com.Ecommerce.acme.service.UserService;
 import com.Ecommerce.acme.validator.UserValidator;
 
 
 @Controller
 public class AdminController {
 
+	@Autowired
+	private UserService userService;
+	
 	@Autowired
 	private UserValidator userValidator;
 
@@ -33,6 +40,9 @@ public class AdminController {
 
 	@Autowired
 	private CategoryService cs;
+	
+	@Autowired
+	private OrderService os;
 
 
 
@@ -119,5 +129,32 @@ public class AdminController {
 		model.addAttribute("category", category1);
 		return "addCategory";
 	}
+	
+	@GetMapping({"/admin/manage_user"}) 
+	public String userProfile(Model model) {
+		model.addAttribute("users", userService.getAllUsers()); 
+		return "manageUser";
+	}
 
+
+	@GetMapping("/admin/update_user/{id}")         
+	public String updateUser(Model model, @ModelAttribute("user")User user, 
+			@PathVariable(name = "id")  int id_user){         
+		Optional<User> user1 = userService.getUser(id_user);          
+		model.addAttribute("user", user1);        
+		return "updateUser";     
+		}
+	
+	@GetMapping("/admin/delete_user/{id}")
+	public String DeleteUser(@PathVariable(name = "id") int id) {
+		userService.removeUser(id);
+		return "redirect:/admin/manage_user";
+	}
+	
+	@GetMapping("/admin/orders")
+	public String ShowOrders(Model model) {
+		model.addAttribute("orders", os.getAllOrder());
+		return "adminOrders";
+	}
+	
 }
