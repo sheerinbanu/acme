@@ -1,5 +1,7 @@
 package com.Ecommerce.acme.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -24,8 +26,28 @@ public class ProductService {
 	private UserService us;
 	
 	@Autowired
+	private SelectionService ss;
+	
+	static List<Integer> quantityList = null;
+	static List<Integer> sizeList = null;
 
-	private SelectionService ss;	
+	static {
+		quantityList = new ArrayList<>();
+		quantityList.add(1);
+		quantityList.add(10);
+		quantityList.add(50);
+		quantityList.add(100);
+	}
+
+	static {
+		sizeList = new ArrayList<>();
+		sizeList.add(41);
+		sizeList.add(42);
+		sizeList.add(43);
+		sizeList.add(44);
+		sizeList.add(45);
+		sizeList.add(46);
+	}
 	
 	double reduction;
 	double marginPrice;
@@ -46,6 +68,13 @@ public class ProductService {
 	public void insertProduct(Product Product) {
 		pr.save(Product);
 	}	
+	
+	public String getListProduct(Model model) {
+		model.addAttribute("products", getAllProduct());
+		model.addAttribute("quantityList", quantityList);
+		model.addAttribute("sizeList", sizeList);
+		return "products";
+	}
 	
 	public String submitSelectionForm(@ModelAttribute("selectionForm") Selection selection,User user, Product product, Authentication authentication, Model model, BindingResult bindingResult){
 
