@@ -74,5 +74,5 @@ public class UserController {
 		model.addAttribute("person", userService.findByUsername(authentication.getName()));
 		return "profil";
 	}
-
+  
 }

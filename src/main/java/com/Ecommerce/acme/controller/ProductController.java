@@ -17,7 +17,6 @@ import com.Ecommerce.acme.service.ProductService;
 @Controller
 public class ProductController {
 
-
 	@Autowired
 	private ProductService ps;
 

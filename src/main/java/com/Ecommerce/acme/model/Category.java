@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.Data;
 
+// comment pour commit bravo
+
 @Entity
 @Table(name= "category")
 @Data

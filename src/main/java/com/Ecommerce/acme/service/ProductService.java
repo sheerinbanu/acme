@@ -24,6 +24,7 @@ public class ProductService {
 	private UserService us;
 	
 	@Autowired
+
 	private SelectionService ss;	
 	
 	double reduction;
