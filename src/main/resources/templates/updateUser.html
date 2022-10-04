@@ -1,97 +1,152 @@
 <!DOCTYPE html>
-<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
+<title>Gestion du Commercial</title>
 <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
-
-<title>Ajouter un utilisateur</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 </head>
 
 <body>
-	<header>
-		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-			<div class="container-fluid">
-				<div>
-					<img src="" th:src="@{/images/acmelogoD.svg}" width="10%"
-						height="10%" />
-				</div>
 
-				<button class="navbar-toggler" type="button"
-					data-bs-toggle="collapse" data-bs-target="#navbarColor01"
-					aria-controls="navbarColor01" aria-expanded="false"
-					aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse" id="navbarColor01">
-					<ul class="navbar-nav me-auto">
-						<li class="nav-item"><a class="nav-link"
-							href="/admin/manage_order">Commandes</a> <a href="/user"></a></li>
-						<li class="nav-item"><a class="nav-link"
-							href="admin/manage_product">Collection</a></li>
-						<li class="nav-item"><a class="nav-link active"
-							href="/admin/manage_user">Profils</a></li>
-						<li class="nav_item"><a class="nav-link"
-							href="admin/manage_category">Categories</a></li>
-						<li class="nav-item"><a href="#"
-							class="btn btn-outline-danger">Deconnexion</a></li>
-					</ul>
+<header>
 
-				</div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="/admin/orders">ACME Gestion Pro.</a>
+			
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+     			 <span class="navbar-toggler-icon"></span>
+   		</button>
+
+			<div class="collapse navbar-collapse" id="navbarColor01">
+
+				<ul class="navbar-nav me-auto">
+					<li class="nav-item"><a class="nav-link" href="/admin/orders">Commande</a>
+					</li>
+					<li class="nav-item"><a class="nav-link"
+						href="/admin/manage_category">Categorie</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="/admin/manage_product">Collection</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="/admin/addAdmin">Création-Admin</a></li>
+					<li class="nav-item"><a class="nav-link" href="/admin/manage_user">Profil-Client</a>
+					</li>
+					<li class="nav-item"><a class="nav-link active" href="/home">Interface-Client</a>
+					</li>
+				</ul>
+
 			</div>
-		</nav>
-	</header>
+		</div>
+
+		<button class="btn btn-outline-danger my-2 my-sm-0">
+			<a onclick="document.forms['logoutForm'].submit()">Déconnexion</a>
+		</button>
+
+	</nav>
+
+</header>
+
+<body>
+
 	<div class="container">
-
-
-		<div class="card-body mt-5">
-
-
-			<div class="d-flex justify-content-around py-5">
-
-				<div class="card border-primary mb-5 d-flex justify-content-around"
-					style="max-width: 40rem;">
-
-					<div class="card-header">Ajouter un profil commercial</div>
-
-					<form th:action="@{'/admin/update_user/' + ${user.get().getId_user}}" th:object="${user}"
-						method="POST">
-
-
-						<div class="form-group">
-							<label for="first_name">Nom</label> <input type="text"
-								th:field="*{last_name}" class="form-control" /> <input
-								type="hidden" th:field="*{id_user}" class="form-control" />
-						</div>
-
-
-						<div>
-							<label for="last_name">Prenom</label> <input type="text"
-								th:field="*{first_name}" class="form-control">
-						</div>
-
-						<div>
-							<label for="email">email</label> <input type="text"
-								th:field="*{email}" class="form-control">
-						</div>
-
-
-
-
-						<input type="submit" class="btn btn-primary" value="Enregistrer">
-						<input type="hidden" th:field="*{id_user}" />
-					</form>
-
-
-				</div>
-
-
-				<div>
-					<a th:href="@{'/admin/manage_user'}" role="button"
-						class="btn btn-outline-success">Retour</a>
-				</div>
+		<div class="row justify-content-center">
+			<div class="col-6 mt-3" sec:authorize="isAuthenticated()">
+				<form id="logoutForm" method="POST" th:action="@{/logout}">
+					<input type="hidden" name="${_csrf.parameterName}"
+						value="${_csrf.token}" />
+				</form>
+					<h2>
+						Accès Portail <span sec:authentication="authorities[0]"></span>
+						ACME Pro.
+					</h2>
 			</div>
 		</div>
 	</div>
+	
+	<div class="container">
+	
+		<div class="row">
+			<div class="col">
+				<nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+					<ol class="breadcrumb mb-0">
+						<li class="breadcrumb-item"><a href="/admin/manage_user">Gestion
+								des Commerciaux</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Commercial 
+							Selectionné</li>
+					</ol>
+				</nav>
+			</div>
+		</div>
+		
+		<div class="p-5">
+			<h1 class="text-center">ACME CREATION Pro.</h1>
+			<p class="text-center">Mise à jour du Commercial</p>
+		</div>
+		
+		<div class="row justify-content-center pb-5">
+			<div class="col-6">
+
+				<form th:action="@{'/admin/update_user/' + ${user.get().getId_user}}" th:object="${user}" method="POST">
+
+
+					<div class="mb-3">
+						<label for="last_name" class="form-label">Nom</label>
+						<input type="text" th:field="*{last_name}" class="form-control" /> 
+					</div>
+					
+					<div class="mb-3">
+						<label for="first_name" class="form-label">Prénom</label>
+						<input type="text" th:field="*{first_name}" class="form-control" /> 
+					</div>
+					
+					<div class="mb-3">
+						<label for="email" class="form-label">Email</label>
+						<input type="text" th:field="*{email}" class="form-control" /> 
+					</div>
+					
+					<div class="mb-3">
+						<label for="email" class="form-label">Taux de Marge</label>
+						<input type="text" th:field="*{margin_rate}" class="form-control" /> 
+					</div>
+					
+					<div class="mb-3">
+						<label for="email" class="form-label">Username</label>
+						<input type="text" th:field="*{username}" class="form-control" /> 
+					</div>
+					
+					<input type="hidden" th:field="*{id_user}" />
+					<input type="hidden" th:field="*{password}" />
+					<input type="hidden" th:field="*{role}" />
+					<input type="hidden" th:field="*{type}" />
+
+					<button type="submit" class="btn btn-primary">Enregister</button>
+
+				</form>
+
+			</div>
+		</div>
+	
+	</div>
 </body>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+		crossorigin="anonymous"></script>
+
+
+<footer class="bg-dark text-center text-white">
+	<div class="text-center p-3 navbar-dark bg-primary">
+		© 2022 Copyright: <a class="text-white" href="#">ACME.com</a>
+		<a href="https://github.com/sheerinbanu/acme" class="text-white" target="_blank">
+			<i class="bi bi-github"></i>
+		</a>
+		<a href="https://trello.com/b/y2dGQzit/acme" class="text-white" target="_blank">
+			<i class="bi bi-kanban"></i>
+		</a>
+	</div>
+</footer>
+
 </html>

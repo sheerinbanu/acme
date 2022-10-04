@@ -5,13 +5,21 @@
 <meta charset="utf-8">
 <title>Profil</title>
 <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 </head>
-<body>
 
-	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<header>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="#">ACME Gestion Pro.</a>
+			<a class="navbar-brand" href="/home">ACME Gestion Pro.</a>
+			
+			 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+     			 <span class="navbar-toggler-icon"></span>
+   			 </button>
+
 			<div class="collapse navbar-collapse" id="navbarColor01">
+
 				<ul class="navbar-nav me-auto">
 					<li class="nav-item"><a class="nav-link active" href="/home">Accueil</a>
 					</li>
@@ -23,6 +31,11 @@
 					</li>
 					<li class="nav-item"><a class="nav-link" href="/cart">Panier</a>
 					</li>
+					
+					<li sec:authorize-url="/admin/" class="nav-item"> 
+						<a class="nav-link" id="admin" th:href="@{/admin/orders}">Interface-Admin</a>
+					</li>
+					
 				</ul>
 			</div>
 		</div>
@@ -30,8 +43,12 @@
 		<button class="btn btn-outline-danger my-2 my-sm-0">
 			<a onclick="document.forms['logoutForm'].submit()">Déconnexion</a>
 		</button>
+
 	</nav>
 
+</header>
+
+<body>
 	<div class="container">
 
 		<div class="row justify-content-center">
@@ -78,7 +95,7 @@
 								alt="avatar" class="rounded-circle img-fluid"
 								style="width: 150px;">
 							<h5 class="my-3" th:text="${person.first_name}"></h5>
-							<p class="text-muted mb-1">Commercial chez ACME</p>
+							<p class="text-muted mb-1" th:text="${person.type} + ' chez ACME'"></p>
 							<p class="text-muted mb-4">Zone d'exploitation E.U</p>
 						</div>
 					</div>
@@ -146,7 +163,7 @@
 					<div class="row">
 						<div class="col-md-6">
 							<div class="card mb-4 mb-md-0">
-								<div class="card-body">
+								<div class="card-body" style="background-color: #e5eeef;">
 									<p class="mb-4">
 										<span class="text-primary font-italic me-1">DATA</span> Bonus
 										Personnel (Feature)
@@ -235,9 +252,23 @@
 		</div>
 	</section>
 </body>
+
+<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+		crossorigin="anonymous"></script>
+
+
 <footer class="bg-dark text-center text-white">
 	<div class="text-center p-3 navbar-dark bg-primary">
 		© 2022 Copyright: <a class="text-white" href="#">ACME.com</a>
+		<a href="https://github.com/sheerinbanu/acme" class="text-white" target="_blank">
+			<i class="bi bi-github"></i>
+		</a>
+		<a href="https://trello.com/b/y2dGQzit/acme" class="text-white" target="_blank">
+			<i class="bi bi-kanban"></i>
+		</a>
 	</div>
 </footer>
+
 </html>

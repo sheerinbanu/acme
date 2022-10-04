@@ -5,13 +5,14 @@
     <meta charset="utf-8">
     <title>Creéation Client</title>
     <link th:href ="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 </head>
 
 <body>
 
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   		<div class="container-fluid">
-   			 <a class="navbar-brand" href="#">ACME Gestion Pro Client.</a>
+   			 <a class="navbar-brand" href="/admin/manage_user">ACME Gestion Pro Client.</a>
   		</div>
  	</nav>
 	
@@ -76,9 +77,17 @@
     </div>
 
 </body>
+
 <footer class="bg-dark text-center text-white">
-  	<div class="text-center p-3 navbar-dark bg-primary"> © 2022 Copyright: 
-  		<a class="text-white" href="#">ACME.com</a>
- 	</div>
+	<div class="text-center p-3 navbar-dark bg-primary">
+		© 2022 Copyright: <a class="text-white" href="#">ACME.com</a>
+		<a href="https://github.com/sheerinbanu/acme" class="text-white" target="_blank">
+			<i class="bi bi-github"></i>
+		</a>
+		<a href="https://trello.com/b/y2dGQzit/acme" class="text-white" target="_blank">
+			<i class="bi bi-kanban"></i>
+		</a>
+	</div>
 </footer>
+
 </html>
