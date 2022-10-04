@@ -34,7 +34,7 @@
 					</li>
 					
 					<li sec:authorize-url="/admin/" class="nav-item"> 
-						<a class="nav-link" id="admin" th:href="@{/admin/orders}">Interface-Admin</a>
+						<a class="nav-link" id="admin" th:href="@{/admin/manage_category}">Interface-Admin</a>
 					</li>
 					
 				</ul>
@@ -71,68 +71,63 @@
 
 		</div>
 	</div>
-	<div class="container py-5">
 
-		<div class="row justify-content-around">
+	<section style="background-color: #eee;">
+		<div class="container py-5">
 
-			<div class="card mb-3" style="width: 18rem;" th:each="product: ${products}">
-
-				<h3 class="card-header" th:text="${product.name}"></h3>
-
-				<div class="card-body">
-					<div class="row justify-content-start">
-						<div class="col-4" th:text="${product.unit_price}"></div>
-						<div class="col-7">EUR</div>
-					</div>
-				</div>
-
-				<img th:src="${product.picture}" width="100%" height="100%" />
-
-				<div class="card-body">
-
-					<p class="card-text" th:text="${product.description}"></p>
-					<div th:text="${product.category.name}"></div>
-
-				</div>
-
-				<form method="POST" class="form-signin" th:object="${selectionForm}"
-					th:action="@{/products}">
-
-					<div class="card-body">
-
-						<div class="form-group pb-3">
-							<label for="name">Quantité</label> <select name="quantity">
-								<option th:each="quantity :${quantityList}"
-									th:text="${quantity}"></option>
-							</select>
-						</div>
-
-						<div class="form-group pb-3">
-							<label for="name">Pointure</label> <select name="size">
-								<option th:each="size :${sizeList}" th:text="${size}"></option>
-							</select>
-						</div>
+			<div class="row">
 			
-						 <input type="hidden" name="product" th:value="${product.id_product}" >
-						 
-						<div class="row">
-							<button type="submit" class="btn btn-danger">Ajouter au
-								Panier</button>
-						</div>
+				<div class="col">
+					<nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+						<ol class="breadcrumb mb-0">
+							<li class="breadcrumb-item"><a href="/order_history">Historique</a></li>
+							<li class="breadcrumb-item active" aria-current="page">Détail de la Commande</li>
+						</ol>
+					</nav>
+				</div>
 
-					</div>
-				</form>
+				<div class="col-md-12 mx-0">
+
+					<table
+						class="table bg-white rounded border table-striped table-dark">
+						<thead>
+							<tr>
+								<th scope="col">ID Commande</th>
+								<th scope="col">Produit</th>
+								<th scope="col">Catégorie</th>
+								<th scope="col">Taille</th>
+								<th scope="col">Quantité</th>
+								<th scope="col">Prix</th>
+								
+							</tr>
+						</thead>
+						
+						<tbody th:each="detail: ${details}">
+							<tr>
+								<th scope="row" th:text="${detail.cart.id_cart}"></th>
+								<td th:text="${detail.product.name}"></td>
+								<td th:text="${detail.product.category.name}"></td>
+								<td th:text="${detail.size}"></td>
+								<td th:text="${detail.quantity}"></td>
+								<td th:text="${detail.margin_price}"></td>
+							</tr>
+						</tbody>
+						
+					</table>
+
+				</div>
 
 			</div>
+
+
 		</div>
-	</div>
-</body>
+	</section>
 
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
-		crossorigin="anonymous"></script>
+		crossorigin="anonymous"></script>	
 
+</body>
 
 <footer class="bg-dark text-center text-white">
 	<div class="text-center p-3 navbar-dark bg-primary">

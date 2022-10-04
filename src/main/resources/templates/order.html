@@ -4,7 +4,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Produits</title>
+<title>Historique des Commandes</title>
 <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 </head>
@@ -34,7 +34,7 @@
 					</li>
 					
 					<li sec:authorize-url="/admin/" class="nav-item"> 
-						<a class="nav-link" id="admin" th:href="@{/admin/manage_category}">Interface-Admin</a>
+						<a class="nav-link" id="admin" th:href="@{/admin/orders}">Interface-Admin</a>
 					</li>
 					
 				</ul>
@@ -79,8 +79,7 @@
 
 				<div class="col-md-12 mx-0">
 
-					<table
-						class="table bg-white rounded border table-striped table-dark">
+					<table class="table bg-white rounded border table-striped table-dark">
 						<thead>
 							<tr>
 								<th scope="col">#</th>
@@ -88,6 +87,7 @@
 								<th scope="col">Montant</th>
 								<th scope="col">Email</th>
 								<th scope="col">Taux</th>
+								<th scope="col">Statut</th>
 								<th scope="col">Détails</th>
 							</tr>
 						</thead>
@@ -98,60 +98,9 @@
 								<td th:text="${order.cart.total_price}"></td>
 								<td th:text="${order.cart.user.email}"></td>
 								<td th:text="${order.cart.user.margin_rate}"></td>
-
-
+								<td th:text="${order.validate} ? 'VALIDÉ' : 'EN TRAITEMENT'" />
 								<td>
-									<button type="button" class="btn btn-primary" th:data-name="${order.id_order}" th:onclick="getNumberCart(this.getAttribute('data-name'))" 
-										data-bs-toggle="modal" data-bs-target="#exampleModal">Détail</button>
-
-									<div class="modal fade" id="exampleModal" tabindex="-1"
-										aria-labelledby="exampleModalLabel" aria-hidden="true">
-
-										<div class="modal-dialog">
-											<div class="modal-content">
-												<div class="modal-header">
-													<h5 class="modal-title" id="exampleModalLabel">Détails
-														de la Commande</h5>
-														
-													<input type="text" id="my_field" th:value="0" th:name="my_field">
-
-													<button type="button" class="btn-close"
-														data-bs-dismiss="modal" aria-label="Close"></button>
-												</div>
-s
-												<div class="modal-body" th:each="detail: ${details}">
-
-
-													<ul class="list-group" th:if="${detail.cart.id_cart} == ${order.id_order}">
-														<li
-															class="list-group-item d-flex justify-content-between align-items-center"
-															th:text="${detail.product.name}"></li>
-														<li
-															class="list-group-item d-flex justify-content-between align-items-center"														
-															th:text="${detail.product.category.name}"></li>
-														<li
-															class="list-group-item d-flex justify-content-between align-items-center"															
-															th:text="'Pointure ' + ${detail.size}"></li>
-
-														<li
-															class="list-group-item d-flex justify-content-between align-items-center"															
-															th:text="'Quantité ' + ${detail.quantity}"></li>
-														<li
-															class="list-group-item d-flex justify-content-between align-items-center"													
-															th:text="'Prix U. ' + ${detail.margin_price}"></li>
-													</ul>
-
-												</div>
-
-												<div class="modal-footer">
-													<button type="button" class="btn btn-warning"
-														data-bs-dismiss="modal">Fermer</button>
-												</div>
-
-											</div>
-										</div>
-
-									</div>
+									<a th:href="@{'/order_history/' + ${order.id_order}}" class="btn btn-success" role="button">Voir</a>
 
 								</td>
 							</tr>
@@ -170,13 +119,6 @@ s
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
 		crossorigin="anonymous"></script>
-		
-	<script th:inline="javascript">
-			function getNumberCart(num) {		
-				alert("number order: " + num);
-				document.getElementById("my_field").value = num;				
-   			 }
-	</script>	
 
 </body>
 

@@ -35,7 +35,7 @@
 					</li>
 					
 					<li sec:authorize-url="/admin/" class="nav-item"> 
-						<a class="nav-link" id="admin" th:href="@{/admin/manage_category}">Interface-Admin</a>
+						<a class="nav-link" id="admin" th:href="@{/admin/orders}">Interface-Admin</a>
 					</li>
 					
 				</ul>
@@ -119,9 +119,8 @@
 												</td>
 
 												<td>
-													<h4 th:text="${selection.margin_price}"></h4> <s
-													class="small text-muted"
-													th:text="${selection.product.unit_price}"></s>
+													<h4 th:text="${selection.margin_price}"></h4> 
+													<s class="small text-muted" th:text="${selection.product.unit_price}"></s>
 												</td>
 												<td><input th:value="${selection.quantity}"
 													class="form-control" disabled></td>
@@ -135,10 +134,10 @@
 								</div>
 							</div>
 
-							<form method="POST" class="form-signin" th:object="${cartForm}"
-								th:action="@{/cart}">
+							<form method="POST" class="form-signin" th:object="${cartForm}" th:action="@{/cart}">
 
 								<input type="hidden" name="user" th:value="${person.id_user}">
+								<input type="hidden" name="total_price" th:value="${finalPrice}">
 
 								<div class="ibox-content">
 									<button type="submit" class="btn btn-primary pull-right">
@@ -148,7 +147,7 @@
 										class="fa fa-arrow-left"></i> Continuer Achat</a>
 								</div>
 							</form>
-
+							
 						</div>
 					</div>
 
@@ -168,13 +167,23 @@
 								<span class="text-muted small"> *Tous les prix appliqués
 									sont HT. </span>
 								<hr>
+								
+							<form method="POST" class="form-signin" th:object="${cartForm}" th:action="@{/cart}">
+
+								<input type="hidden" name="user" th:value="${person.id_user}">
+								<input type="hidden" name="total_price" th:value="${finalPrice}">
+								
 								<div class="m-t-sm">
 									<div class="btn-group">
-										<a href="#" class="btn btn-primary btn-sm"><i
-											class="fa fa-shopping-cart"></i> Commander</a> <a href="#"
-											class="btn btn-white btn-sm"> Annuler</a>
+										<button type="submit" class="btn btn-primary btn-sm">
+											<i class="fa fa-shopping-cart"></i> Commander
+										</button>
+										<a href="/products" class="btn btn-white btn-sm">Continuer Achat </a>
 									</div>
 								</div>
+								
+							</form>
+								
 							</div>
 						</div>
 
