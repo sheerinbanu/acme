@@ -1,11 +1,7 @@
 package com.Ecommerce.acme.controller;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,12 +10,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import com.Ecommerce.acme.model.Cart;
 import com.Ecommerce.acme.model.Category;
 import com.Ecommerce.acme.model.Order;
 import com.Ecommerce.acme.model.Product;
-import com.Ecommerce.acme.model.Selection;
 import com.Ecommerce.acme.model.User;
 import com.Ecommerce.acme.repository.OrderRepository;
 import com.Ecommerce.acme.service.AuthService;
@@ -28,7 +21,6 @@ import com.Ecommerce.acme.service.OrderService;
 import com.Ecommerce.acme.service.ProductService;
 import com.Ecommerce.acme.service.UserService;
 import com.Ecommerce.acme.validator.UserValidator;
-
 
 @Controller
 public class AdminController {
