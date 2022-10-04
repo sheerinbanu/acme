@@ -49,7 +49,6 @@ public class UserController {
 
 		authService.createNewUser(userForm);
 
-
 		return "redirect:/login";
 	}
 
@@ -75,5 +74,5 @@ public class UserController {
 		model.addAttribute("person", userService.findByUsername(authentication.getName()));
 		return "profil";
 	}
-	
+  
 }

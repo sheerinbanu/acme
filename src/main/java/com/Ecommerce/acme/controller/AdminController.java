@@ -1,7 +1,8 @@
 package com.Ecommerce.acme.controller;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -11,10 +12,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import com.Ecommerce.acme.model.Cart;
 import com.Ecommerce.acme.model.Category;
 import com.Ecommerce.acme.model.Order;
 import com.Ecommerce.acme.model.Product;
+import com.Ecommerce.acme.model.Selection;
 import com.Ecommerce.acme.model.User;
+import com.Ecommerce.acme.repository.OrderRepository;
 import com.Ecommerce.acme.service.AuthService;
 import com.Ecommerce.acme.service.CategoryService;
 import com.Ecommerce.acme.service.OrderService;
@@ -26,9 +31,6 @@ import com.Ecommerce.acme.validator.UserValidator;
 @Controller
 public class AdminController {
 
-	@Autowired
-	private UserService userService;
-	
 	@Autowired
 	private UserValidator userValidator;
 
@@ -43,6 +45,12 @@ public class AdminController {
 	
 	@Autowired
 	private OrderService os;
+	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private OrderRepository or;
 
 
 
@@ -86,14 +94,14 @@ public class AdminController {
     }
 	
 	@GetMapping("/admin/delete_product/{id}")
-		public String DeleteProduct(@PathVariable(name = "id") int id) {
+	public String DeleteProduct(@PathVariable(name = "id") int id) {
 			ps.deleteProduct(id);
 			return "redirect:/admin/manage_product";
 	}
 	
 			
 	@GetMapping("/admin/update_product/{id}")
-		public String UpdateProduct(Model model, @ModelAttribute("product")Product product, @PathVariable(name = "id")  int productId, BindingResult bindingResult){
+	public String UpdateProduct(Model model, @ModelAttribute("product")Product product, @PathVariable(name = "id")  int productId, BindingResult bindingResult){
 			Optional<Product> product1 = ps.getProduct(productId);
 			model.addAttribute("product", product1);
 			model.addAttribute("categories", cs.getAllCategory());
@@ -131,30 +139,49 @@ public class AdminController {
 	}
 	
 	@GetMapping({"/admin/manage_user"}) 
-	public String userProfile(Model model) {
+	public String getAllUsersProfile(Model model) {
 		model.addAttribute("users", userService.getAllUsers()); 
 		return "manageUser";
 	}
 
-
 	@GetMapping("/admin/update_user/{id}")         
-	public String updateUser(Model model, @ModelAttribute("user")User user, 
-			@PathVariable(name = "id")  int id_user){         
-		Optional<User> user1 = userService.getUser(id_user);          
+	public String getUser(Model model, @ModelAttribute("user")User user, @PathVariable(name = "id")  int id_user, BindingResult bindingResult){         
+		Optional<User> user1 = userService.getUser(id_user);
 		model.addAttribute("user", user1);        
 		return "updateUser";     
 		}
+	
+	@PostMapping("/admin/update_user/{id}")
+	public String updateUser(@ModelAttribute User user) {
+		userService.insertUser(user);
+		return "redirect:/admin/manage_user";
+	}
 	
 	@GetMapping("/admin/delete_user/{id}")
 	public String DeleteUser(@PathVariable(name = "id") int id) {
 		userService.removeUser(id);
 		return "redirect:/admin/manage_user";
-	}
+	}	
 	
 	@GetMapping("/admin/orders")
-	public String ShowOrders(Model model) {
+	public String ShowOrders(@ModelAttribute("orderForm") Order order, Model model) {
 		model.addAttribute("orders", os.getAllOrder());
 		return "adminOrders";
 	}
 	
+	@GetMapping("/admin/orders/{id}")
+	public String getSelectionByOrder(Model model, @ModelAttribute("selection")Order order, @PathVariable(name = "id") int Id_order){
+		os.getDetailSelectionById(Id_order, model);
+		return "AdminOrderDetails";
+	}
+	
+	@PostMapping("/admin/orders")
+	public String submitCartForm(@RequestParam("orderId") int orderId, @RequestParam("orderDate") String orderDate, @ModelAttribute("orderForm") Order order, Model model) {
+		System.out.println(orderId);
+		order.setId_order(orderId);
+		order.setOrder_date(orderDate);
+		order.setValidate(true);
+		or.save(order);
+		return "redirect:/admin/orders";
+	}
 }

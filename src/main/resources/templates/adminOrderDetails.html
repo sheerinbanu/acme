@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
 <meta charset="utf-8">
-<title>Ajout Catégorie</title>
+<title>Détail Commande</title>
 <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 </head>
@@ -50,71 +51,81 @@
 <body>
 
 	<div class="container">
+
 		<div class="row justify-content-center">
+
 			<div class="col-6 mt-3" sec:authorize="isAuthenticated()">
+
 				<form id="logoutForm" method="POST" th:action="@{/logout}">
 					<input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" />
 				</form>
+
 				<h2>
 					Accès Portail <span sec:authentication="authorities[0]"></span>
 					ACME Pro.
 				</h2>
+
 			</div>
+
 		</div>
 	</div>
 
-	<div class="container">
+	<section style="background-color: #eee;">
+		<div class="container py-5">
 
-		<div class="row">
-			<div class="col">
-				<nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
-					<ol class="breadcrumb mb-0">
-						<li class="breadcrumb-item"><a href="/admin/manage_category">Gestion
-								Categories</a></li>
-						<li class="breadcrumb-item active" aria-current="page">Ajout
-							Categorie</li>
-					</ol>
-				</nav>
+			<div class="row">
+			
+				<div class="col">
+					<nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+						<ol class="breadcrumb mb-0">
+							<li class="breadcrumb-item"><a href="/admin/orders">Historique Général</a></li>
+							<li class="breadcrumb-item active" aria-current="page">Détail de la Commande</li>
+						</ol>
+					</nav>
+				</div>
+
+				<div class="col-md-12 mx-0">
+
+					<table
+						class="table bg-white rounded border table-striped table-dark">
+						<thead>
+							<tr>
+								<th scope="col">ID Commande</th>
+								<th scope="col">Produit</th>
+								<th scope="col">Catégorie</th>
+								<th scope="col">Taille</th>
+								<th scope="col">Quantité</th>
+								<th scope="col">Prix</th>
+								
+							</tr>
+						</thead>
+						
+						<tbody th:each="detail: ${details}">
+							<tr>
+								<th scope="row" th:text="${detail.cart.id_cart}"></th>
+								<td th:text="${detail.product.name}"></td>
+								<td th:text="${detail.product.category.name}"></td>
+								<td th:text="${detail.size}"></td>
+								<td th:text="${detail.quantity}"></td>
+								<td th:text="${detail.margin_price}"></td>
+							</tr>
+						</tbody>
+						
+					</table>
+
+				</div>
+
 			</div>
+
 		</div>
+	</section>
 
-		<div class="p-5">
-			<h1 class="text-center">ACME CREATION Pro.</h1>
-			<p class="text-center">Ajout d'une Catégorie</p>
-		</div>
-
-		<div class="row justify-content-center pb-5">
-			<div class="col-6">
-
-				<form th:action="@{/admin/add_category}" th:object="${category}"
-					method="POST">
-
-
-					<div class="mb-3">
-						<label for="exampleInputPassword1" class="form-label">Catégorie</label>
-
-						<input type="text" th:field="*{name}" class="form-control"
-							placeholder="Outdoor" /> <input type="hidden"
-							th:field="*{id_category}" class="form-control" />
-					</div>
-
-					<button type="submit" class="btn btn-primary">Enregister</button>
-
-				</form>
-
-			</div>
-		</div>
-
-	</div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+		crossorigin="anonymous"></script>	
 
 </body>
-
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
-		crossorigin="anonymous"></script>
-
 
 <footer class="bg-dark text-center text-white">
 	<div class="text-center p-3 navbar-dark bg-primary">

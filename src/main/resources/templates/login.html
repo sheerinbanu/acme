@@ -11,7 +11,7 @@
 
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="#">ACME Gestion Pro.</a>
+			<a class="navbar-brand" href="/">ACME Gestion Pro.</a>
 		</div>
 	</nav>
 
@@ -27,7 +27,7 @@
 
 				<form class="form-signin" method="POST" th:action="@{/login}">
 
-					<div class="mb-3">
+					<div class="mb-3">		
 						<span class="text-center" th:text="${message}"></span> <span
 							th:text="${error}"></span> <input name="username" type="text"
 							class="form-control" placeholder="Username" autofocus="true" />

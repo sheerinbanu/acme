@@ -8,13 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.Ecommerce.acme.model.Product;
 import com.Ecommerce.acme.model.Selection;
 import com.Ecommerce.acme.model.User;
 import com.Ecommerce.acme.service.ProductService;
-
 
 @Controller
 public class ProductController {
@@ -43,10 +41,6 @@ public class ProductController {
 		sizeList.add(46);
 	}
 
-	double reduction;
-	double marginPrice;
-	double finalPrice;
-
 	@GetMapping("/products")
 	public String getHomePage(Model model) {
 		model.addAttribute("products", ps.getAllProduct());
@@ -57,7 +51,7 @@ public class ProductController {
 	}
 
 	@PostMapping("/products")
-	public String addSelectToCart(@ModelAttribute("selectionForm") Selection selection,User user, Product product, Authentication authentication, Model model, BindingResult bindingResult){
+	public String addSelectToCart(Selection selection, User user, Product product, Authentication authentication, Model model, BindingResult bindingResult) {
 		return ps.submitSelectionForm(selection, user, product, authentication, model, bindingResult);
 	}
 

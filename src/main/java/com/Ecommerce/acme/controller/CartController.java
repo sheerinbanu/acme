@@ -4,11 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -41,7 +39,6 @@ public class CartController {
 	@Autowired
 	private OrderService os;
 
-	double sum = 0;
 
 	@GetMapping({"/cart"})
 	public String getSelection(Model model, User user, Authentication authentication )  throws Exception {
@@ -52,6 +49,7 @@ public class CartController {
 
 		int currentUserId = us.findByUsername(authentication.getName()).getId_user();
 		ArrayList<Selection> list = new ArrayList<Selection>();
+		double sum = 0;
 
 		for(Selection s : ss.getAllSelection()) {
 
@@ -87,8 +85,6 @@ public class CartController {
 
 		int currentUserId = us.findByUsername(authentication.getName()).getId_user();
 
-		
-		cart.setTotal_price(sum);
 		cart.setUser(user);
 
 		cs.insertCart(cart);

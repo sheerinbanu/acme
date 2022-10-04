@@ -25,7 +25,6 @@ public class Product {
 	private String picture;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_category", referencedColumnName= "id_category", insertable = true, updatable = false)
-	private Category category;
-	
+	@JoinColumn(name = "id_category", referencedColumnName= "id_category", insertable = true, updatable = true)
+	private Category category;	
 }

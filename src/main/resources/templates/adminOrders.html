@@ -5,28 +5,32 @@
 
 <head>
 <meta charset="utf-8">
-<title>Suivi des commandes</title>
+<title>Liste des Commandes</title>
 <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 </head>
 
-<body>
+<header>
 
-
-	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="#">ACME Gestion Pro.</a>
+			<a class="navbar-brand" href="/admin/orders">ACME Gestion Pro.</a>
+			
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+     			 <span class="navbar-toggler-icon"></span>
+   		</button>
 
 			<div class="collapse navbar-collapse" id="navbarColor01">
 
 				<ul class="navbar-nav me-auto">
-					<li class="nav-item"><a class="nav-link" href="#">Commande</a>
+					<li class="nav-item"><a class="nav-link" href="/admin/orders">Commande</a>
 					</li>
 					<li class="nav-item"><a class="nav-link"
 						href="/admin/manage_category">Categorie</a></li>
 					<li class="nav-item"><a class="nav-link"
 						href="/admin/manage_product">Collection</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="/admin/addAdmin">Profil-Admin</a></li>
+						href="/admin/addAdmin">Création-Admin</a></li>
 					<li class="nav-item"><a class="nav-link" href="/admin/manage_user">Profil-Client</a>
 					</li>
 					<li class="nav-item"><a class="nav-link active" href="/home">Interface-Client</a>
@@ -42,6 +46,10 @@
 
 	</nav>
 
+</header>
+
+<body>
+
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-6 mt-3" sec:authorize="isAuthenticated()">
@@ -56,48 +64,75 @@
 			</div>
 		</div>
 	</div>
-
-	<div class="d-flex justify-content-around mt-5 mb-5 ">
-		<div class="table-responsive">
-			<form class="d-flex">
-				<input class="form-control me-sm-2" type="text"
-					placeholder="rechercher des produits">
-				<button class="btn btn-secondary my-2 my-sm-0" type="submit"></button>
-			</form>
-		</div>
-		<div>
-			<a href="/admin/add_product" class="btn btn-outline-success">+
-				Add Product YOYOYOYOYO</a>
-		</div>
-	</div>
-
-
-	<div class="container">
-		<div class="table-responsive">
+	
+	<section style="background-color: #eee;">
+	<div class="container py-5">
+	
+	<div class="table-responsive">
+		
 			<table class="table table-hover">
 				<thead class="table-dark">
 					<tr>
-						<th>N° de commande</th>
-						<th scope="col">Date de commande</th>
+						<th>Id</th>
+						<th scope="col">Date</th>				
 						<th scope="col">Commercial</th>
-						<th scope="col">Montant Total</th>
+						<th scope="col">Email</th>
+						<th scope="col">Total</th>
 						<th scope="col">Détails</th>
-						<th scope="col"></th>
+						<th scope="col">Statut</th>
+						<th scope="col">Check</th>
 					</tr>
 				</thead>
 				<tbody>
+
 					<tr class="table-active" th:each="order: ${orders}">
+				
 						<td th:text="${order.id_order}">
 						<td th:text="${order.order_date}">
 						<td th:text="${order.user.username}">
+						<td th:text="${order.user.email}">
 						<td th:text="${order.cart.total_price}">
 						<td>
-							<a th:href="@{'/admin/orders/' + ${order.id_order}}" class="btn btn-success" role="button">Détails</a>
+							<a th:href="@{'/admin/orders/' + ${order.id_order}}" class="btn btn-warning" role="button">Voir</a>
+						</td>
+						<td th:text="${order.validate} ? 'TRAITÉ' : 'À VÉRIFIER'" />
+						
 						<td>
+							<div>
+								<form method="POST" class="form-signin" th:action="@{/admin/orders}">
+									<input type="hidden" name="orderId" th:value="${order.id_order}">
+									<input type="hidden" name="orderDate" th:value="${order.order_date}">
+									<button type="submit" class="btn btn-success"> Valider</button>
+								</form>
+							</div>
+							
+						</td>
 					</tr>
+						
 				</tbody>
 			</table>
-		</div>
 	</div>
+		
+	</div>
+</section>
 </body>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+		crossorigin="anonymous"></script>
+
+
+<footer class="bg-dark text-center text-white">
+	<div class="text-center p-3 navbar-dark bg-primary">
+		© 2022 Copyright: <a class="text-white" href="#">ACME.com</a>
+		<a href="https://github.com/sheerinbanu/acme" class="text-white" target="_blank">
+			<i class="bi bi-github"></i>
+		</a>
+		<a href="https://trello.com/b/y2dGQzit/acme" class="text-white" target="_blank">
+			<i class="bi bi-kanban"></i>
+		</a>
+	</div>
+</footer>
+
 </html>
