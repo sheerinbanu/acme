@@ -8,7 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
 import lombok.Data;
 
 @Entity
@@ -19,9 +18,9 @@ public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id_product;
+	private Double unit_price;
 	private String name;
 	private String description;
-	private Double unit_price;
 	private String picture;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

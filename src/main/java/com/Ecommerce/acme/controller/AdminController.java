@@ -70,7 +70,7 @@ public class AdminController {
 	}
 
 	@GetMapping("/admin/manage_product")
-	public String ManageController(Model model){
+	public String ManageProduct(Model model){
 		model.addAttribute("products", ps.getAllProduct());
 		return "manageProduct";
 	}

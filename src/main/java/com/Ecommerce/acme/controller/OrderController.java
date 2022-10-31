@@ -19,7 +19,7 @@ public class OrderController {
 	
 
 	@GetMapping({"/order_history"})
-	public String profil(Model model, Authentication authentication) {
+	public String getAllOrders(Model model, Authentication authentication) {
 		return os.getAllOrdersByUser(authentication, model);
 	}
 	
